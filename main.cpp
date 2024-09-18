@@ -12,24 +12,34 @@ struct Studentas{
 };
 
 int main(){
-    Studentas x;
-    int darbai, pazymys;
+    vector<Studentas> studentai;
+    int darbai, pazymys, stud_skaicius;
 
-    //Prašom duomenų ir juos įrašom į struktūrą
-    cout << "Įrašyk studento vardą: ";
-    getline(cin, x.vardas);
+    cout << "Kiek bus studentų? ";
+    cin >> stud_skaicius;
 
-    cout << "įrašyk studento pavardę: ";
-    getline(cin, x.pavarde);
+    //Prašom duomenų ir juos įrašom į struktūrą kiekvienam studentui
+    for (int i = 0; i < stud_skaicius; ++i) {
+        Studentas x;
+        cout << "\nDuomenys studento nr. " << i + 1 << ":\n";
 
-    cout << "Kiek namų darbų? ";
-    cin >> darbai;
+        cin.ignore(); //išvengiam \n bug'o
 
-    for (int i = 0; i < darbai; ++i) {
-        cout << "Įrašyk namų darbo pažymį " << i + 1 << ": ";
-        cin >> pazymys;
-        x.nd.push_back(pazymys);  // Įdedam į vektorių
+        cout << "Įrašyk studento vardą: ";
+        getline(cin, x.vardas);
+
+        cout << "įrašyk studento pavardę: ";
+        getline(cin, x.pavarde);
+
+        cout << "Kiek namų darbų? ";
+        cin >> darbai;
+
+        for (int i = 0; i < darbai; ++i) {
+            cout << "Įrašyk namų darbo pažymį " << i + 1 << ": ";
+            cin >> pazymys;
+            x.nd.push_back(pazymys);  // Įdedam į vektorių
+        }
+        cout << "Įrašyk egzamino rezultatą: ";
+        cin >> x.egz;
     }
-    cout << "Įrašyk egzamino rezultatą: ";
-    cin >> x.egz;
 }
