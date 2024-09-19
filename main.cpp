@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <cmath>
+#include <iomanip>
 
 using namespace std;
 
@@ -12,15 +13,17 @@ struct Studentas{
     int egz;
 };
 
-// Function to calculate the mean of homework grades
+// funkcija vidurkio paskaičiavimui
 double rezultatas(const vector<int>& nd, int egz) { //taupom atmintį ir rodom į vektorių
     if (nd.empty()) return 0.00; 
-    int sum = 0;
-    for (int grade : nd) {
+    double sum = 0;
+    for (double grade : nd) {
         sum += grade;
     }
     double vid = sum / nd.size();
+    cout << vid << endl;
     double rez = 0.4 * vid + 0.6 * egz;
+    cout << rez << endl;
     return rez;
 }
 
@@ -59,13 +62,17 @@ int main(){
         studentai.push_back(x);  // Įdedam studentą į vektorių
     }
     // Atspausdinam studentų duomenis
-    cout << "\nPavardė\tVardas\tGalutinis (Vid.)\n";
+    cout << "\n------------------------------------------\n";
+    cout << left << setw(15) << "Pavardė" //su setw nustatom tarpus
+         << setw(15) << "Vardas" 
+         << setw(20) << "Galutinis (Vid.)" << endl;
+    cout << "------------------------------------------\n";
+
     for (const auto& studentas : studentai) {
         double vidurkis = rezultatas(studentas.nd, studentas.egz);
-        cout << "--------------------------------" << endl;
-        cout << studentas.pavarde 
-             << "\t " << studentas.vardas
-             << "\t" << vidurkis 
+        cout << left << setw(15) << studentas.pavarde
+             << setw(15) << studentas.vardas
+             << setw(20) << fixed << setprecision(2) << vidurkis // setprecision(2) => du skaičiai po kablelio
              << endl;
     }
     return 0; //uždarom programą
