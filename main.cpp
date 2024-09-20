@@ -4,6 +4,7 @@
 #include <cmath>
 #include <iomanip>
 #include <algorithm>
+#include <limits> // for numeric_limits
 
 using namespace std;
 
@@ -45,12 +46,36 @@ double mediana(vector<int> nd) {
     }
 }
 
+bool arTeisinga(const string& name) {
+    if (name.empty() || name.length() > 10) return false;
+    for (char ch : name) {
+        if (!isalpha(ch)) return false; // Negalima kitko nei skaičiai
+    }
+    return true;
+}
+
 int main(){
     vector<Studentas> studentai;
     int darbai, pazymys, stud_skaicius;
 
     cout << "Kiek bus studentų? ";
-    cin >> stud_skaicius;
+    
+    while (true) {
+        try {
+            if (!(cin >> stud_skaicius)) {
+                throw runtime_error("Įveskite teisingą studentų skaičių (skaičių).");
+            }
+            if (stud_skaicius <= 0 || stud_skaicius > 1000) { 
+                throw runtime_error("Studentų skaičius turi būti teigiamas skaičius ir negali būti daugiau nei 1000.");
+            }
+            break;
+        } catch (runtime_error& e) {
+            cout << e.what() << endl;
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Pakartokite studentų skaičių: ";
+        }
+    }
 
     //Prašom duomenų ir juos įrašom į struktūrą kiekvienam studentui
     for (int i = 0; i < stud_skaicius; ++i) {
@@ -59,26 +84,92 @@ int main(){
 
         cin.ignore(); //išvengiam \n bug'os
 
-        cout << "Įrašyk studento vardą: ";
-        getline(cin, x.vardas);
+        while (true) {
+            cout << "Įrašyk studento vardą (ne daugiau nei 10 simbolių): ";
+            getline(cin, x.vardas);
+            if (arTeisinga(x.vardas)) {
+                break;
+            } else {
+                cout << "Netinkamas vardas. Vardas turi būti ne tuščias, sudarytas tik iš raidžių ir ne ilgesnis nei 10 simbolių. Bandykite dar kartą.\n";
+            }
+        }
 
-        cout << "įrašyk studento pavardę: ";
-        getline(cin, x.pavarde);
+
+        while (true) {
+            cout << "Įrašyk studento pavardę (ne daugiau nei 10 simbolių): ";
+            getline(cin, x.pavarde);
+            if (arTeisinga(x.pavarde)) {
+                break;
+            } else {
+                cout << "Netinkama pavardė. Pavardė turi būti ne tuščia, sudaryta tik iš raidžių ir ne ilgesnė nei 10 simbolių. Bandykite dar kartą.\n";
+            }
+        }
 
         cout << "Kiek namų darbų? ";
-        cin >> darbai;
-        x.nd.resize(darbai);  // Resize the vector to hold the homework grades
+
+        while (true) {
+            try {
+                if (!(cin >> darbai)) {
+                    throw runtime_error("Įveskite teisingą namų darbų skaičių (skaičių).");
+                }
+                if (darbai <= 0 || darbai > 1000) {
+                    throw runtime_error("Namų darbų skaičius turi būti teigiamas skaičius ir ne didesnis už 1000.");
+                }
+                break;
+            } catch (runtime_error& e) {
+                cout << e.what() << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Ignore invalid input
+                cout << "Pakartokite namų darbų skaičių: ";
+            }
+        }
+
+        x.nd.resize(darbai);  // kad laikytume nd pažymius
 
         for (int j = 0; j < darbai; ++j) {
-            cout << "Įrašyk namų darbo pažymį " << j + 1 << ": ";
-            cin >> x.nd[j];  // Įdedam į vektorių
+            while (true) {
+                try {
+                    cout << "Įrašyk namų darbo pažymį " << j + 1 << ": ";
+                    if (!(cin >> pazymys)) {
+                        throw runtime_error("Įveskite teisingą pažymį (skaičių).");
+                    }
+                    if (pazymys < 0 || pazymys > 10) {
+                        throw out_of_range("Pažymys turi būti tarp 0 ir 10.");
+                    }
+                    x.nd[j] = pazymys;  // Įdedam į vektorių
+                    break;
+                } catch (runtime_error& e) {
+                    cout << e.what() << endl;
+                    cin.clear();  // Clear the error flag
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                } catch (out_of_range& e) {
+                    cout << e.what() << endl;
+                }
+            }
         }
 
         cout << "Įrašyk egzamino rezultatą: ";
-        cin >> x.egz;
+        while (true) {
+            try {
+                if (!(cin >> x.egz)) {
+                    throw runtime_error("Įveskite teisingą egzamino pažymį (skaičių).");
+                }
+                if (x.egz < 0 || x.egz > 10) {
+                    throw out_of_range("Egzamino pažymys turi būti tarp 0 ir 10.");
+                }
+                break;
+            } catch (runtime_error& e) {
+                cout << e.what() << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            } catch (out_of_range& e) {
+                cout << e.what() << endl;
+            }
+        }
 
         studentai.push_back(x);  // Įdedam studentą į vektorių
     }
+    
     // Atspausdinam studentų duomenis
     cout << "\n------------------------------------------------------------------\n";
     cout << left << setw(15) << "Pavardė" //su setw nustatom tarpus
