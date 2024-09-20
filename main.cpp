@@ -3,6 +3,7 @@
 #include <string>
 #include <cmath>
 #include <iomanip>
+#include <algorithm>
 
 using namespace std;
 
@@ -21,10 +22,27 @@ double rezultatas(const vector<int>& nd, int egz) { //taupom atmintį ir rodom �
         sum += grade;
     }
     double vid = sum / nd.size();
-    cout << vid << endl;
     double rez = 0.4 * vid + 0.6 * egz;
-    cout << rez << endl;
     return rez;
+}
+
+// Funkcija medianos paskaičiavimui
+double mediana(vector<int> nd) {
+    if (nd.empty()) return 0.0;
+
+    // Surikiavimas, kad gautusi skaičių eilutė. Pridėti sorto algoritmą
+    sort(nd.begin(), nd.end()); // naudojamas quicksort didėjimo tvarka
+
+    int dydis = nd.size();
+    
+    if (dydis % 2 == 0) {
+        // Jeigu lyginis elementų skaičius
+        double rez = nd[dydis / 2 - 1] + nd[dydis / 2];
+        return rez / 2;
+    } else {
+        // Jeigu nelyginis
+        return nd[dydis / 2];
+    }
 }
 
 int main(){
@@ -62,17 +80,20 @@ int main(){
         studentai.push_back(x);  // Įdedam studentą į vektorių
     }
     // Atspausdinam studentų duomenis
-    cout << "\n------------------------------------------\n";
+    cout << "\n------------------------------------------------------------------\n";
     cout << left << setw(15) << "Pavardė" //su setw nustatom tarpus
          << setw(15) << "Vardas" 
-         << setw(20) << "Galutinis (Vid.)" << endl;
-    cout << "------------------------------------------\n";
+         << setw(20) << "Galutinis (Vid.)"
+         << setw(20) << "Galutinis (Med.)" << endl;
+    cout << "------------------------------------------------------------------\n";
 
     for (const auto& studentas : studentai) {
         double vidurkis = rezultatas(studentas.nd, studentas.egz);
+        double med = mediana(studentas.nd);
         cout << left << setw(15) << studentas.pavarde
              << setw(15) << studentas.vardas
              << setw(20) << fixed << setprecision(2) << vidurkis // setprecision(2) => du skaičiai po kablelio
+             << setw(20) << fixed << setprecision(2) << med
              << endl;
     }
     return 0; //uždarom programą

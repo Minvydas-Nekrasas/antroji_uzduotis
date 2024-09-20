@@ -2,6 +2,8 @@
     "files.associations": {
         "string": "cpp",
         "iostream": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "iomanip": "cpp",
+        "vector": "cpp"
     }
 }
