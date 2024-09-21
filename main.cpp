@@ -15,35 +15,42 @@ struct Studentas{
     int egz;
 };
 
+double formule(double bendras, int egz){ // panaudojama ta pati formulė ir medianai, ir vidurkiui
+    double rez = 0.4 * bendras + 0.6 * egz;
+    return rez;
+}
+
 // funkcija vidurkio paskaičiavimui
-double rezultatas(const vector<int>& nd, int egz) { //taupom atmintį ir rodom į vektorių
+double vidurkis(const vector<int>& nd, int egz) { //taupom atmintį ir rodom į vektorių
     if (nd.empty()) return 0.00; 
     double sum = 0;
     for (double grade : nd) {
         sum += grade;
     }
     double vid = sum / nd.size();
-    double rez = 0.4 * vid + 0.6 * egz;
+    double rez = formule(vid, egz);
     return rez;
 }
 
 // Funkcija medianos paskaičiavimui
-double mediana(vector<int> nd) {
+double mediana(vector<int> nd, int egz) {
     if (nd.empty()) return 0.0;
 
     // Surikiavimas, kad gautusi skaičių eilutė. Pridėti sorto algoritmą
     sort(nd.begin(), nd.end()); // naudojamas quicksort didėjimo tvarka
 
     int dydis = nd.size();
-    
+    double med;
     if (dydis % 2 == 0) {
         // Jeigu lyginis elementų skaičius
-        double rez = nd[dydis / 2 - 1] + nd[dydis / 2];
-        return rez / 2;
+        med = (nd[dydis / 2 - 1] + nd[dydis / 2])/2;
+        
     } else {
         // Jeigu nelyginis
-        return nd[dydis / 2];
+        med = nd[dydis / 2];
     }
+    double rez = formule(med, egz);
+    return rez;
 }
 
 bool arTeisinga(const string& name) {
@@ -123,22 +130,52 @@ int main(){
 
         studentai.push_back(x);  // įdedam studentą į vektorių
     }
-    
+    int choice;
+    cout << "\nPasirinkite, ką norite apskaičiuoti:\n";
+    cout << "0 - Galutinis pažymys pagal vidurkį\n";
+    cout << "1 - Galutinis pažymys pagal medianą\n";
+
+    while(true){
+        cout << "Įveskite pasirinkimą (1 arba 0): ";
+        if(!(cin >> choice)||(choice != 0 && choice != 1)){
+            cout << "Įvestas neteisingas simbolis. Bandykite dar kartą.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+        else{
+            break;
+        }
+    }
+
+    string pasirinkimas_pav;
+    double pasirinkimas;
+
+    if (choice == 0){
+        pasirinkimas_pav = "(Vid.)";
+    }
+    else{
+        pasirinkimas_pav = "(Med.)";
+    }
+
     // Atspausdinam studentų duomenis
-    cout << "\n------------------------------------------------------------------\n";
+    cout << "\n----------------------------------------------\n";
     cout << left << setw(15) << "Pavardė" //su setw nustatom tarpus
          << setw(15) << "Vardas" 
-         << setw(20) << "Galutinis (Vid.)"
-         << setw(20) << "Galutinis (Med.)" << endl;
-    cout << "------------------------------------------------------------------\n";
+         << "Galutinis " 
+         << pasirinkimas_pav << endl;
+    cout << "----------------------------------------------\n";
 
     for (const auto& studentas : studentai) {
-        double vidurkis = rezultatas(studentas.nd, studentas.egz);
-        double med = mediana(studentas.nd);
+        if (choice == 0){
+            pasirinkimas = vidurkis(studentas.nd, studentas.egz);
+        }
+        else{
+            pasirinkimas = mediana(studentas.nd, studentas.egz);
+        }
         cout << left << setw(15) << studentas.pavarde
              << setw(15) << studentas.vardas
-             << setw(20) << fixed << setprecision(2) << vidurkis // setprecision(2) => du skaičiai po kablelio
-             << setw(20) << fixed << setprecision(2) << med
+             << setw(20) << fixed << setprecision(2) << pasirinkimas // setprecision(2) => du skaičiai po kablelio
              << endl;
     }
     return 0; //uždarom programą
