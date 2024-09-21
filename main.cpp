@@ -61,6 +61,18 @@ bool arTeisinga(const string& name) {
     return true;
 }
 
+// Funkcija atsitiktinių rezultatų generavimui
+void generuotiRandom(Studentas& x, int nd_kiekis) {
+    cout << "Atsitiktinai sugeneruoti namų darbų pažymiai: ";
+    for (int i = 0; i < nd_kiekis; i++) {
+        int random_pazymys = (rand() % 10) + 1;  // Generuoja skaičių nuo 1 iki 10
+        x.nd.push_back(random_pazymys);
+        cout << random_pazymys << " "; 
+    }
+    x.egz = (rand() % 10) + 1;  // Generuoja skaičių nuo 1 iki 10
+    cout << "\nSugeneruotas egzamino pažymys: " << x.egz << "\n";
+}
+
 int main(){
     vector<Studentas> studentai;
     string vardas, pavarde, input;
@@ -91,40 +103,75 @@ int main(){
             continue;
         }
 
-        // Imame namų darbų pažymį
-        cout << "Įrašykite namų darbų pažymius (nuo 0 iki 10). Norėdami baigti įvesti pažymius, paspauskite ENTER:\n";
+        // Klausia, kokio suvedimo norime
+        int choice;
+        cout << "Ar norite atsitiktinai sugeneruoti namų darbų ir egzamino pažymius?\n";
+        cout << "0 - Ne, įvesiu ranka\n";
+        cout << "1 - Taip, sugeneruok atsitiktinai\n";     
+        
         while (true) {
-            cout << "Įrašykite pažymį: ";
-            getline(cin, input);
-            if (input.empty()) break; // Stabdom programą, jei 2 enter
-            
-            try {
-                pazymys = stoi(input);
-                if (pazymys < 0 || pazymys > 10) {
-                    throw out_of_range("Pažymys turi būti tarp 0 ir 10.");
-                }
-                x.nd.push_back(pazymys); // Pridedam pažymį į vektorių
-            } catch (invalid_argument&) {
-                cout << "Įveskite teisingą pažymį (skaičių nuo 0 iki 10).\n";
-            } catch (out_of_range& e) {
-                cout << e.what() << endl;
+            cout << "Įveskite pasirinkimą (1 arba 0): ";
+            if (!(cin >> choice) || (choice != 0 && choice != 1)) {
+                cout << "Neteisingas pasirinkimas. Bandykite dar kartą.\n";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            } else {
+                break;
             }
         }
+        
+        if (choice == 1) {
+            // Sugeneruojam atsitiktinus namų darbų ir egzamino rezultatus
+            int nd_kiekis;
+            cout << "Kiek norite sugeneruoti namų darbų pažymių?(Ne daugiau nei 10 000): ";
+            while (!(cin >> nd_kiekis) || nd_kiekis < 0 || nd_kiekis > 10000) {
+                cout << "Įveskite teisingą skaičių: ";
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
 
-        // Imame egzamino pažymį
-        cout << "Įrašykite egzamino pažymį: ";
-        while (true) {
-            getline(cin, input);
-            try {
-                x.egz = stoi(input);
-                if (x.egz < 0 || x.egz > 10) {
-                    throw out_of_range("Egzamino pažymys turi būti tarp 0 ir 10.");
+            generuotiRandom(x, nd_kiekis);  // Kviečiam funkciją
+
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        } else {
+            // Suvedame namų darbų rezultatus rankiniu būdu
+            cout << "Įrašykite namų darbų pažymius (nuo 0 iki 10). Norėdami baigti įvesti pažymius, paspauskite ENTER:\n";
+            cin.ignore();  // išvalom \n
+            while (true) {
+                cout << "Įrašykite pažymį: ";
+                getline(cin, input);
+                if (input.empty()) break;
+
+                try {
+                    pazymys = stoi(input);
+                    if (pazymys < 0 || pazymys > 10) {
+                        throw out_of_range("Pažymys turi būti tarp 0 ir 10.");
+                    }
+                    x.nd.push_back(pazymys);
+                } catch (invalid_argument&) {
+                    cout << "Įveskite teisingą pažymį (skaičių nuo 0 iki 10).\n";
+                } catch (out_of_range& e) {
+                    cout << e.what() << endl;
                 }
-                break;
-            } catch (invalid_argument&) {
-                cout << "Įveskite teisingą egzamino pažymį (skaičių nuo 0 iki 10).\n";
-            } catch (out_of_range& e) {
-                cout << e.what() << endl;
+            }
+
+            // Imame egzamino rezultatą
+            cout << "Įrašykite egzamino pažymį: ";
+            while (true) {
+                getline(cin, input);
+                try {
+                    x.egz = stoi(input);
+                    if (x.egz < 0 || x.egz > 10) {
+                        throw out_of_range("Egzamino pažymys turi būti tarp 0 ir 10.");
+                    }
+                    break;
+                } catch (invalid_argument&) {
+                    cout << "Įveskite teisingą egzamino pažymį (skaičių nuo 0 iki 10).\n";
+                } catch (out_of_range& e) {
+                    cout << e.what() << endl;
+                }
             }
         }
 
