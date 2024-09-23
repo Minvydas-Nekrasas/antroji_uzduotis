@@ -5,6 +5,7 @@
         "limits": "cpp",
         "iomanip": "cpp",
         "vector": "cpp",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "sstream": "cpp"
     }
 }
