@@ -110,6 +110,21 @@ void skaitytiIsFailo(const string& failo_adresas, vector<Studentas>& studentai) 
     file.close();
 }
 
+// Funkcija studentų rūšiavimui pagal vardą arba pavardę
+void rikiuotiStudentus(vector<Studentas>& studentai, bool pagalVarda) {
+    if (pagalVarda) {
+        // rikiuojam pagal vardą
+        sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
+            return a.vardas < b.vardas; //lyginama pagal ASCII vertes
+        });
+    } else {
+        // rikiuojam pagal pavardę
+        sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
+            return a.pavarde < b.pavarde;
+        }); // [](funkcijos parametrai){funkcijos algoritmas}, su [] nurodom, kad tai lambda funkcija (kaip python lambda)
+    }
+}
+
 int main(){
     vector<Studentas> studentai;
     string vardas, pavarde, input;
@@ -254,6 +269,28 @@ int main(){
     else{
         pasirinkimas_pav = "(Med.)";
     }
+
+// Rikiavimo pasirinkimas
+    int sort_choice;
+    cout << "\nPasirinkite, pagal ką norite surikiuoti studentus:\n";
+    cout << "0 - Rikiuoti pagal pavardę\n";
+    cout << "1 - Rikiuoti pagal vardą\n";
+
+    while(true){
+        cout << "Įveskite pasirinkimą (0 arba 1): ";
+        if(!(cin >> sort_choice)||(sort_choice != 0 && sort_choice != 1)){
+            cout << "Įvestas neteisingas simbolis. Bandykite dar kartą.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        }
+        else{
+            break;
+        }
+    }
+
+    // Rikiuojam studentus pagal pasirinkimą
+    rikiuotiStudentus(studentai, sort_choice == 1);
 
     // Atspausdinam studentų duomenis
     cout << "\n----------------------------------------------\n";
