@@ -5,6 +5,7 @@
 #include "ivedimas.h"
 #include "rikiavimas.h"
 #include "vertinimas.h"
+#include "rezultatas.h"
 
 using namespace std; // kad nereiktų rašyt std::string
 
@@ -29,16 +30,6 @@ int main(){
         }
     }
 
-    string pasirinkimas_pav;
-    double pasirinkimas;
-
-    if (choice == 0){
-        pasirinkimas_pav = "(Vid.)";
-    }
-    else{
-        pasirinkimas_pav = "(Med.)";
-    }
-
 // Rikiavimo pasirinkimas
     int sort_choice;
     cout << "\nPasirinkite, pagal ką norite surikiuoti studentus:\n";
@@ -61,25 +52,7 @@ int main(){
     // Rikiuojam studentus pagal pasirinkimą
     rikiuotiStudentus(studentai, sort_choice == 1);
 
-    // Atspausdinam studentų duomenis
-    cout << "\n----------------------------------------------\n";
-    cout << left << setw(15) << "Pavardė" //su setw nustatom tarpus
-         << setw(15) << "Vardas" 
-         << "Galutinis " 
-         << pasirinkimas_pav << endl;
-    cout << "----------------------------------------------\n";
-
-    for (const auto& studentas : studentai) {
-        if (choice == 0){
-            pasirinkimas = vidurkis(studentas.nd, studentas.egz);
-        }
-        else{
-            pasirinkimas = mediana(studentas.nd, studentas.egz);
-        }
-        cout << left << setw(15) << studentas.pavarde
-             << setw(15) << studentas.vardas
-             << setw(20) << fixed << setprecision(2) << pasirinkimas // setprecision(2) => du skaičiai po kablelio
-             << endl;
-    }
+    spausdinti(studentai, choice);
+    
     return 0; //uždarom programą
 }
