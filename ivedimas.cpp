@@ -3,6 +3,7 @@
 #include <iostream>
 #include <limits>
 #include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -20,15 +21,25 @@ void nuskaitymas(vector<Studentas>& studentai){
     cout << "Ar norite nuskaityti duomenis iš failo? (1 - Taip, 0 - Ne): ";
     int readFromFile;
     cin >> readFromFile;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
     if (readFromFile == 1) {
         cin.ignore();
         string failo_adresas;
-        cout << "Įveskite failo adresą: ";
-        getline(cin, failo_adresas);
-        skaitytiIsFailo(failo_adresas, studentai);
-    } else {
+        while (true) {
+            cout << "Įveskite failo adresą: ";
+            getline(cin, failo_adresas);
 
+            ifstream file(failo_adresas);  // Bandom atidaryti
+            if (file.is_open()) {
+                file.close();  // Jei atsidaro, uždarom
+                skaitytiIsFailo(failo_adresas, studentai);
+                break;  // Išeinam iš ciklo
+            } else {
+                cout << "Nepavyko atidaryti failo! Bandykite dar kartą.\n";
+            }
+        }
+    } else {
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Norėdami baigti įvesti studentus, paspauskite ENTER du kartus.\n";
         
         while (true) {
@@ -65,7 +76,7 @@ void nuskaitymas(vector<Studentas>& studentai){
                 if (!(cin >> choice) || (choice != 0 && choice != 1)) {
                     cout << "Neteisingas pasirinkimas. Bandykite dar kartą.\n";
                     cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cin.ignore('\n');
                 } else {
                     break;
                 }
@@ -78,13 +89,13 @@ void nuskaitymas(vector<Studentas>& studentai){
                 while (!(cin >> nd_kiekis) || nd_kiekis < 0 || nd_kiekis > 10000) {
                     cout << "Įveskite teisingą skaičių: ";
                     cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cin.ignore('\n');
                 }
 
                 generuotiRandom(x, nd_kiekis);  // Kviečiam funkciją
 
                 cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cin.ignore('\n');
 
             } else {
                 // Suvedame namų darbų rezultatus rankiniu būdu

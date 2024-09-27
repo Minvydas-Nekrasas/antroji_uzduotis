@@ -22,11 +22,6 @@ void generuotiRandom(Studentas& x, int nd_kiekis) {
 // Funkcija skirta perskaityti studento duomenis iš failo
 void skaitytiIsFailo(const string& failo_adresas, vector<Studentas>& studentai) {
     ifstream file(failo_adresas);
-    if (!file.is_open()) {
-        cerr << "Nepavyko atidaryti failo!\n";
-        return;
-    }
-
     string eilute;
     getline(file, eilute); // Praleidžiam pirmą eilutę
 
