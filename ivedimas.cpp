@@ -10,12 +10,12 @@ using namespace std;
 bool arTeisinga(const string& name) {
     if (name.empty() || name.length() > 10) return false;
     for (char ch : name) {
-        if (!isalpha(ch)) return false; // Negalima kitko nei skaičiai
+        if (!isalpha(ch)) return false; // Tik leidžiami skaičiai
     }
     return true;
 }
 
-void nuskaitymas(vector<Studentas>& studentai){
+void nuskaitymas(vector<Studentas>& studentai) {
     string  input;
     int pazymys;
     cout << "Ar norite nuskaityti duomenis iš failo? (1 - Taip, 0 - Ne): ";
@@ -23,7 +23,7 @@ void nuskaitymas(vector<Studentas>& studentai){
     cin >> readFromFile;
 
     if (readFromFile == 1) {
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         string failo_adresas;
         while (true) {
             cout << "Įveskite failo adresą: ";
@@ -39,9 +39,9 @@ void nuskaitymas(vector<Studentas>& studentai){
             }
         }
     } else {
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear newline from previous input
         cout << "Norėdami baigti įvesti studentus, paspauskite ENTER du kartus.\n";
-        
+
         while (true) {
             Studentas x;
             
@@ -75,9 +75,10 @@ void nuskaitymas(vector<Studentas>& studentai){
                 cout << "Įveskite pasirinkimą (1 arba 0): ";
                 if (!(cin >> choice) || (choice != 0 && choice != 1)) {
                     cout << "Neteisingas pasirinkimas. Bandykite dar kartą.\n";
-                    cin.clear();
-                    cin.ignore('\n');
+                    cin.clear(); // Clear error state
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear invalid input
                 } else {
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear newline after input
                     break;
                 }
             }
@@ -85,22 +86,20 @@ void nuskaitymas(vector<Studentas>& studentai){
             if (choice == 1) {
                 // Sugeneruojam atsitiktinus namų darbų ir egzamino rezultatus
                 int nd_kiekis;
-                cout << "Kiek norite sugeneruoti namų darbų pažymių?(Ne daugiau nei 10 000): ";
+                cout << "Kiek norite sugeneruoti namų darbų pažymių? (Ne daugiau nei 10 000): ";
                 while (!(cin >> nd_kiekis) || nd_kiekis < 0 || nd_kiekis > 10000) {
                     cout << "Įveskite teisingą skaičių: ";
                     cin.clear();
-                    cin.ignore('\n');
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // pravalom netinkamą atsakymą
                 }
 
                 generuotiRandom(x, nd_kiekis);  // Kviečiam funkciją
 
-                cin.clear();
-                cin.ignore('\n');
-
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
             } else {
                 // Suvedame namų darbų rezultatus rankiniu būdu
                 cout << "Įrašykite namų darbų pažymius (nuo 0 iki 10). Norėdami baigti įvesti pažymius, paspauskite ENTER:\n";
-                cin.ignore();  // išvalom \n
+                
                 while (true) {
                     cout << "Įrašykite pažymį: ";
                     getline(cin, input);
