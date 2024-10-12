@@ -11,11 +11,11 @@
 #include <chrono> // For time measurement
 
 using namespace std; // kad nereiktų rašyt std::string
-using namespace std::chrono; // So we don't need to write std::chrono::
+using namespace std::chrono;
 
 void generuotiDuomenis(int studentuSk, const string &failoPavadinimas) {
 
-    auto start = high_resolution_clock::now();
+    auto start = high_resolution_clock::now(); // fiksuojam laiką (pradžia)
     ofstream file(failoPavadinimas);
     file << "Pavarde Vardas ND1 ND2 ND3 ND4 ND5 Egzaminas\n"; // Pirma failo eilutė
 
@@ -45,18 +45,43 @@ void generuotiDuomenis(int studentuSk, const string &failoPavadinimas) {
 
     file.close();
 
-    // End measuring time
+    // fiksuojam laiką (pabaiga)
     auto end = high_resolution_clock::now();
     
-    // Calculate duration in milliseconds
+    // Paskaičiuojam trukmę
     auto duration_ms = duration_cast<milliseconds>(end - start);
 
-    // Convert milliseconds to seconds as floating-point number
+    // Milisekundes paverčiam į sekundes
     double duration_sec = duration_ms.count() / 1000.0;
 
 
     cout << "Sugeneruotas failas: " << failoPavadinimas << " su " << studentuSk << " studentais.\n";
     cout << "Sugeneravimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
+}
+void skaiciavimai(vector<Studentas>& studentai, int choice) {
+    for (auto& studentas : studentai) {
+        if (choice == 0) {
+            studentas.galutinis = vidurkis(studentas.nd, studentas.egz); // Galutinis pagal vidurkį
+        } else {
+            studentas.galutinis = mediana(studentas.nd, studentas.egz); // Galutinis pagal medianą
+        }
+    }
+}
+
+void padalintiStudentus(const vector<Studentas>& studentai) {
+    ofstream kietiakiaiFile("kietiakiai.txt");
+    ofstream vargsiukaiFile("vargsiukai.txt");
+
+    for (const auto& studentas : studentai) {
+        if (studentas.galutinis >= 5.0) {
+            kietiakiaiFile << studentas.vardas << " " << studentas.pavarde << " " << studentas.galutinis << "\n";
+        } else {
+            vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " " << studentas.galutinis << "\n";
+        }
+    }
+
+    kietiakiaiFile.close();
+    vargsiukaiFile.close();
 }
 
 int main(){
@@ -88,6 +113,7 @@ int main(){
     }
 
     nuskaitymas(studentai);
+
     cout << "\nPasirinkite, ką norite apskaičiuoti:\n";
     cout << "0 - Galutinis pažymys pagal vidurkį\n";
     cout << "1 - Galutinis pažymys pagal medianą\n";
@@ -105,7 +131,9 @@ int main(){
         }
     }
 
-// Rikiavimo pasirinkimas
+    skaiciavimai(studentai, choice);
+    padalintiStudentus(studentai);
+
     int sort_choice;
     cout << "\nPasirinkite, pagal ką norite surikiuoti studentus:\n";
     cout << "0 - Rikiuoti pagal pavardę\n";

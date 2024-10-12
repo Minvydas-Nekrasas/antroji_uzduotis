@@ -12,6 +12,7 @@ struct Studentas {
     string pavarde;
     vector<int> nd;
     int egz;
+    double galutinis;
 };
 
 #endif
