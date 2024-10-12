@@ -6,13 +6,72 @@
 #include "rikiavimas.h"
 #include "vertinimas.h"
 #include "rezultatas.h"
+#include <fstream>
+#include <random>
 
 using namespace std; // kad nereiktų rašyt std::string
 
+void generuotiDuomenis(int studentuSk, const string &failoPavadinimas) {
+    ofstream file(failoPavadinimas);
+    file << "Pavarde Vardas ND1 ND2 ND3 ND4 ND5 Egzaminas\n"; // Pirma failo eilutė
+
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 10);  // Generuojam pažymius nuo 1 iki 10
+
+    for (int i = 0; i < studentuSk; ++i) {
+        string pavarde = "Pavarde" + to_string(i + 1);
+        string vardas = "Vardas" + to_string(i + 1);
+
+        // Generuojam 5 namų darbų pažymius
+        int nd1 = dist(gen);
+        int nd2 = dist(gen);
+        int nd3 = dist(gen);
+        int nd4 = dist(gen);
+        int nd5 = dist(gen);
+
+        // Generuojam egzamino pažymį
+        int egzaminas = dist(gen);
+
+        // Įrašom duomenis į failą
+        file << pavarde << " " << vardas << " "
+             << nd1 << " " << nd2 << " " << nd3 << " " << nd4 << " " << nd5 << " "
+             << egzaminas << "\n";
+    }
+
+    file.close();
+    cout << "Sugeneruotas failas: " << failoPavadinimas << " su " << studentuSk << " studentais.\n";
+}
+
 int main(){
     vector<Studentas> studentai;
-    nuskaitymas(studentai);
     int choice;
+
+    cout << "\nPasirinkite ar norite sugeneruoti failus su atsitiktiniais duomenimis:\n";
+    cout << "0 - Sugeneruoti failus\n";
+    cout << "1 - Ne\n";
+    while (true) {
+        cout << "Įveskite pasirinkimą (0 arba 1): ";
+        if (!(cin >> choice) || (choice != 0 && choice != 1)) {
+            cout << "Įvestas neteisingas simbolis. Bandykite dar kartą.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        } else {
+            break;
+        }
+    }
+
+    if (choice == 0) {
+        // Generuojami 5 failai
+        generuotiDuomenis(1000, "studentai_1000.txt");
+        generuotiDuomenis(10000, "studentai_10000.txt");
+        generuotiDuomenis(100000, "studentai_100000.txt");
+        generuotiDuomenis(1000000, "studentai_1000000.txt");
+        generuotiDuomenis(10000000, "studentai_10000000.txt");
+    }
+
+    nuskaitymas(studentai);
     cout << "\nPasirinkite, ką norite apskaičiuoti:\n";
     cout << "0 - Galutinis pažymys pagal vidurkį\n";
     cout << "1 - Galutinis pažymys pagal medianą\n";
