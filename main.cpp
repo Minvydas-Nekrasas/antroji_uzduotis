@@ -67,17 +67,27 @@ void skaiciavimai(vector<Studentas>& studentai, int choice) {
         }
     }
 }
-
-void padalintiStudentus(const vector<Studentas>& studentai) {
-    ofstream kietiakiaiFile("kietiakiai.txt");
-    ofstream vargsiukaiFile("vargsiukai.txt");
-
+void padalintiStudentus(const vector<Studentas>& studentai, vector<Studentas>& kietiakiai, vector<Studentas>& vargsiukai) {
     for (const auto& studentas : studentai) {
         if (studentas.galutinis >= 5.0) {
-            kietiakiaiFile << studentas.vardas << " " << studentas.pavarde << " " << studentas.galutinis << "\n";
+            kietiakiai.push_back(studentas);
         } else {
-            vargsiukaiFile << studentas.vardas << " " << studentas.pavarde << " " << studentas.galutinis << "\n";
+            vargsiukai.push_back(studentas);
         }
+    }
+}
+void isvestiIFailus(const vector<Studentas>& kietiakai, const vector<Studentas>& vargsiukai) {
+    ofstream kietiakiaiFile("kietiakai.txt");
+    ofstream vargsiukaiFile("vargsiukai.txt");
+
+    kietiakiaiFile << "Pavarde Vardas Galutinis Balas\n";
+    for (const auto& studentas : kietiakai) {
+        kietiakiaiFile << studentas.pavarde << " " << studentas.vardas << " " << studentas.galutinis << "\n";
+    }
+
+    vargsiukaiFile << "Pavarde Vardas Galutinis Balas\n";
+    for (const auto& studentas : vargsiukai) {
+        vargsiukaiFile << studentas.pavarde << " " << studentas.vardas << " " << studentas.galutinis << "\n";
     }
 
     kietiakiaiFile.close();
@@ -131,8 +141,14 @@ int main(){
         }
     }
 
-    skaiciavimai(studentai, choice);
-    padalintiStudentus(studentai);
+    skaiciavimai(studentai, choice); // Apskaičiuojami galutiniai pažymiai
+
+    // Rūšiuojam studentus į kietiakius ir vargšiukus
+    vector<Studentas> kietiakai, vargsiukai;
+    padalintiStudentus(studentai, kietiakai, vargsiukai);
+
+    // Išvedimas į failus
+    isvestiIFailus(kietiakai, vargsiukai);
 
     int sort_choice;
     cout << "\nPasirinkite, pagal ką norite surikiuoti studentus:\n";
