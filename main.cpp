@@ -8,10 +8,14 @@
 #include "rezultatas.h"
 #include <fstream>
 #include <random>
+#include <chrono> // For time measurement
 
 using namespace std; // kad nereiktų rašyt std::string
+using namespace std::chrono; // So we don't need to write std::chrono::
 
 void generuotiDuomenis(int studentuSk, const string &failoPavadinimas) {
+
+    auto start = high_resolution_clock::now();
     ofstream file(failoPavadinimas);
     file << "Pavarde Vardas ND1 ND2 ND3 ND4 ND5 Egzaminas\n"; // Pirma failo eilutė
 
@@ -40,7 +44,19 @@ void generuotiDuomenis(int studentuSk, const string &failoPavadinimas) {
     }
 
     file.close();
+
+    // End measuring time
+    auto end = high_resolution_clock::now();
+    
+    // Calculate duration in milliseconds
+    auto duration_ms = duration_cast<milliseconds>(end - start);
+
+    // Convert milliseconds to seconds as floating-point number
+    double duration_sec = duration_ms.count() / 1000.0;
+
+
     cout << "Sugeneruotas failas: " << failoPavadinimas << " su " << studentuSk << " studentais.\n";
+    cout << "Sugeneravimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
 }
 
 int main(){
