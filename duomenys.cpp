@@ -5,8 +5,11 @@
 #include <stdexcept>
 #include <string>
 #include <sstream>
+#include <iomanip>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 // Funkcija atsitiktinių rezultatų generavimui
 void generuotiRandom(Studentas& x, int nd_kiekis) {
@@ -21,6 +24,9 @@ void generuotiRandom(Studentas& x, int nd_kiekis) {
 }
 // Funkcija skirta perskaityti studento duomenis iš failo
 void skaitytiIsFailo(const string& failo_adresas, vector<Studentas>& studentai) {
+
+    auto start = high_resolution_clock::now();
+
     ifstream file(failo_adresas);
     string eilute;
     getline(file, eilute); // Praleidžiam pirmą eilutę
@@ -48,4 +54,9 @@ void skaitytiIsFailo(const string& failo_adresas, vector<Studentas>& studentai) 
     }
 
     file.close();
+
+    auto end = high_resolution_clock::now();
+    auto duration_ms = duration_cast<milliseconds>(end - start);
+    double duration_sec = duration_ms.count() / 1000.0;
+    cout << "Failo nuskaitymo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
 }

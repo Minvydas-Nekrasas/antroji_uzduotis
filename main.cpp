@@ -8,7 +8,7 @@
 #include "rezultatas.h"
 #include <fstream>
 #include <random>
-#include <chrono> // For time measurement
+#include <chrono>
 
 using namespace std; // kad nereiktų rašyt std::string
 using namespace std::chrono;
@@ -68,6 +68,7 @@ void skaiciavimai(vector<Studentas>& studentai, int choice) {
     }
 }
 void padalintiStudentus(const vector<Studentas>& studentai, vector<Studentas>& kietiakiai, vector<Studentas>& vargsiukai) {
+    auto start = high_resolution_clock::now();
     for (const auto& studentas : studentai) {
         if (studentas.galutinis >= 5.0) {
             kietiakiai.push_back(studentas);
@@ -75,8 +76,13 @@ void padalintiStudentus(const vector<Studentas>& studentai, vector<Studentas>& k
             vargsiukai.push_back(studentas);
         }
     }
+    auto end = high_resolution_clock::now();
+    auto duration_ms = duration_cast<milliseconds>(end - start);
+    double duration_sec = duration_ms.count() / 1000.0;
+    cout << "Padalinimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
 }
 void isvestiIFailus(const vector<Studentas>& kietiakai, const vector<Studentas>& vargsiukai) {
+    auto start = high_resolution_clock::now();
     ofstream kietiakiaiFile("kietiakai.txt");
     ofstream vargsiukaiFile("vargsiukai.txt");
 
@@ -92,6 +98,11 @@ void isvestiIFailus(const vector<Studentas>& kietiakai, const vector<Studentas>&
 
     kietiakiaiFile.close();
     vargsiukaiFile.close();
+
+    auto end = high_resolution_clock::now();
+    auto duration_ms = duration_cast<milliseconds>(end - start);
+    double duration_sec = duration_ms.count() / 1000.0;
+    cout << "Failų išvedimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
 }
 
 int main(){
