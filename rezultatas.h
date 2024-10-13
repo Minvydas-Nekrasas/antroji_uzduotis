@@ -4,6 +4,9 @@
 #include <vector>
 #include "studentas.h"
 #include "vertinimas.h"
+#include <iostream>
+#include <iomanip>
+#include <sstream>
 
 using namespace std;
 

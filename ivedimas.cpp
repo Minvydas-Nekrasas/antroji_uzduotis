@@ -1,9 +1,4 @@
 #include "ivedimas.h"
-#include "duomenys.h"
-#include <iostream>
-#include <limits>
-#include <sstream>
-#include <fstream>
 
 using namespace std;
 

@@ -1,7 +1,4 @@
 #include "rezultatas.h"
-#include <iostream>
-#include <iomanip>
-#include <sstream>
 
 // Atspausdinam studentų duomenis
 void spausdinti(const vector<Studentas>& studentai, bool choice) {

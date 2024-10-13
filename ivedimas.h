@@ -4,6 +4,11 @@
 #include <string>
 #include <vector>
 #include "studentas.h"
+#include "duomenys.h"
+#include <iostream>
+#include <limits>
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 
