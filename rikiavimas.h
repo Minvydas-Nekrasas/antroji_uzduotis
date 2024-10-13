@@ -7,6 +7,6 @@
 using namespace std;
 
 string toLowerCase(const string& str);
-void rikiuotiStudentus(vector<Studentas>& studentai, bool pagalVarda);
+void rikiuotiStudentus(vector<Studentas>& studentai, int sort_choice);
 
 #endif

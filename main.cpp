@@ -73,22 +73,21 @@ int main(){
     cout << "\nPasirinkite, pagal ką norite surikiuoti studentus:\n";
     cout << "0 - Rikiuoti pagal pavardę\n";
     cout << "1 - Rikiuoti pagal vardą\n";
+    cout << "2 - Rikiuoti pagal galutinį pažymį\n";
 
-    while(true){
-        cout << "Įveskite pasirinkimą (0 arba 1): ";
-        if(!(cin >> sort_choice)||(sort_choice != 0 && sort_choice != 1)){
+    while (true) {
+        cout << "Įveskite pasirinkimą (0, 1 arba 2): ";
+        if (!(cin >> sort_choice) || (sort_choice < 0 || sort_choice > 2)) { // Priimam 0, 1 or 2
             cout << "Įvestas neteisingas simbolis. Bandykite dar kartą.\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
-        }
-        else{
+        } else {
             break;
         }
     }
 
-    // Rikiuojam studentus pagal pasirinkimą
-    rikiuotiStudentus(studentai, sort_choice == 1);
+    rikiuotiStudentus(studentai, sort_choice);
 
     spausdinti(studentai, choice);
     
