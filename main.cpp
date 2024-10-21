@@ -66,9 +66,6 @@ int main(){
     vector<Studentas> kietiakai, vargsiukai;
     padalintiStudentus(studentai, kietiakai, vargsiukai);
 
-    // Išvedimas į failus
-    isvestiIFailus(kietiakai, vargsiukai);
-
     int sort_choice;
     cout << "\nPasirinkite, pagal ką norite surikiuoti studentus:\n";
     cout << "0 - Rikiuoti pagal pavardę\n";
@@ -88,6 +85,9 @@ int main(){
     }
 
     rikiuotiStudentus(studentai, sort_choice);
+    
+    // Išvedimas į failus
+    isvestiIFailus(kietiakai, vargsiukai, sort_choice);
 
     spausdinti(studentai, choice);
     

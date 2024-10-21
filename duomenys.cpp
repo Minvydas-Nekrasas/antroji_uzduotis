@@ -72,10 +72,13 @@ void padalintiStudentus(const vector<Studentas>& studentai, vector<Studentas>& k
     double duration_sec = duration_ms.count() / 1000.0;
     cout << "Padalinimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
 }
-void isvestiIFailus(const vector<Studentas>& kietiakai, const vector<Studentas>& vargsiukai) {
+void isvestiIFailus(vector<Studentas>& kietiakai, vector<Studentas>& vargsiukai, int sort_choice) {
     auto start = high_resolution_clock::now();
     ofstream kietiakiaiFile("kietiakai.txt");
     ofstream vargsiukaiFile("vargsiukai.txt");
+
+    rikiuotiStudentus(kietiakai, sort_choice);
+    rikiuotiStudentus(vargsiukai, sort_choice);
 
     kietiakiaiFile << "Pavarde Vardas Galutinis Balas\n";
     for (const auto& studentas : kietiakai) {
@@ -98,13 +101,18 @@ void isvestiIFailus(const vector<Studentas>& kietiakai, const vector<Studentas>&
 
 // Funkcija atsitiktinių rezultatų generavimui
 void generuotiRandom(Studentas& x, int nd_kiekis) {
-    cout << "Atsitiktinai sugeneruoti namų darbų pažymiai: ";
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dist(1, 10);  // Pažymiai generuojami nuo 1 iki 10
+
+    std::cout << "Atsitiktinai sugeneruoti namų darbų pažymiai: ";
     for (int i = 0; i < nd_kiekis; i++) {
-        int random_pazymys = (rand() % 10) + 1;  // Generuoja skaičių nuo 1 iki 10
+        int random_pazymys = dist(gen);
         x.nd.push_back(random_pazymys);
-        cout << random_pazymys << " "; 
+        cout << random_pazymys << " ";
     }
-    x.egz = (rand() % 10) + 1;  // Generuoja skaičių nuo 1 iki 10
+
+    x.egz = dist(gen);  // Atsitinktinai sugeneruojame ir egzamino pažymį
     cout << "\nSugeneruotas egzamino pažymys: " << x.egz << "\n";
 }
 // Funkcija skirta perskaityti studento duomenis iš failo
