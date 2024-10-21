@@ -1,4 +1,5 @@
-# Studentų Rezultatų Skaičiavimo Sistema
+# Studentų Rezultatų Skaičiavimo Sistema (v0.1)
+
 Tai yra C++ programa, kuri apskaičiuoja studentų galutinius pažymius pagal namų darbų ir egzamino rezultatus.
 Programa leidžia vartotojui įvesti studentų informaciją (vardą, pavardę, namų darbų ir egzamino pažymius) rankiniu būdu arba sugeneruoti juos atsitiktinai. Kodas gali apskaičiuoti galutinį pažymį pagal vidurkį arba medianą, atsižvelgiant į namų darbų pažymius ir egzaminą. Taip pat galima rūšiuoti studentus pagal vardą arba pavardę ir atspausdinti galutinius rezultatus lentelės formatu.
 ## Turinys
@@ -42,3 +43,33 @@ Projektas suskirstytas į kelis failus, kad būtų lengviau tvarkyti kodą:
 3. Vartotojas gali pasirinkti, kaip apskaičiuoti galutinį pažymį – pagal vidurkį ar medianą.
 4. Programa rūšiuos studentus pagal jūsų pasirinktą kriterijų (vardą arba pavardę) ir atspausdins rezultatus.
 
+# v0.2
+1. Pridėta failų sukūrimo funkcija - sukūriami 5 failai (1 000 studentų, 10 000 studentų, 100 000 studentų, 1 000 000 studentų ir 10 000 000 studentų)
+2. Sukurta funkcija, dalinanti studentus į dvi kategorijas. Studentai išvedami į du naujus failus:
+
+    - Studentai, kurių galutinis balas < 5.0 - vargšiukai
+
+     - Studentai, kurių galutinis balas >= 5.0 - kietiakai
+
+3. Sukurta funkcija kategorijų išvedimui į 2 atskirus failus: vargsiukai.txt, kietiakai.txt
+
+4. Matuojama programos sparta šiems veiksmams: 
+      - failų generavimui
+      - duomenų nuskaitymui iš failo 
+      - studentų rūšiavimui į 2 kategorijas
+      - surūšiuotų studentų išvedimui į du failus
+
+## Vidutiniai laiko spartos matavimai
+| **Studentų skaičius** | **Failo genravimas (sek)** | **Rūšiavimas į 2 kategorijas (sek)** | Išvedimas į 2 failus (sek) |
+|------------------|--------------------|-----------------------|----------------------|
+| 1,000            | 0.0028             | 0.004                 | 0.010                |
+| 10,000           | 0.0294              | 0.811                 | 0.499                |
+| 100,000          | 0.2462            | 2.825                 | 0.176                |
+| 1,000,000        | 1.7686             | 3.529                 | 2.327                |
+| 10,000,000       | 12.1972            | 11.268                | 39.660               |
+
+## Naujos funkcijos:
+- generuotiDuomenis() -  generuojami 5 studentų failai (studentai_1000.txt, studentai_10000.txt, studentai_100000.txt, studentai_1000000.txt, studentai_10000000.txt)
+- skaiciavimai() - paskaičiuojamas vidurkis arba mediana kiekvienam studentui esančiam faile ir duomenys išsaugomi struktūroje
+- padalintiStudentus() - padalinami studentai į 2 kategorijas
+- isvestiIFailus() - išvedami studentai į du atskirus failus (kietiakai.txt, vargšiukai.txt)
