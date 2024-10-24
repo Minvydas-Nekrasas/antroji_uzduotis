@@ -49,7 +49,7 @@ void generuotiDuomenis(int studentuSk, const string &failoPavadinimas) {
     cout << "Sugeneruotas failas: " << failoPavadinimas << " su " << studentuSk << " studentais.\n";
     cout << "Sugeneravimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
 }
-void skaiciavimai(vector<Studentas>& studentai, int choice) {
+void skaiciavimai(list<Studentas>& studentai, int choice) {
     for (auto& studentas : studentai) {
         if (choice == 0) {
             studentas.galutinis = vidurkis(studentas.nd, studentas.egz); // Galutinis pagal vidurkį
@@ -58,7 +58,7 @@ void skaiciavimai(vector<Studentas>& studentai, int choice) {
         }
     }
 }
-void padalintiStudentus(const vector<Studentas>& studentai, vector<Studentas>& kietiakiai, vector<Studentas>& vargsiukai) {
+void padalintiStudentus(const list<Studentas>& studentai, list<Studentas>& kietiakiai, vector<Studentas>& vargsiukai) {
     auto start = high_resolution_clock::now();
     for (const auto& studentas : studentai) {
         if (studentas.galutinis >= 5.0) {
@@ -72,7 +72,7 @@ void padalintiStudentus(const vector<Studentas>& studentai, vector<Studentas>& k
     double duration_sec = duration_ms.count() / 1000.0;
     cout << "Padalinimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
 }
-void isvestiIFailus(vector<Studentas>& kietiakai, vector<Studentas>& vargsiukai, int sort_choice) {
+void isvestiIFailus(list<Studentas>& kietiakai, list<Studentas>& vargsiukai, int sort_choice) {
     auto start = high_resolution_clock::now();
     ofstream kietiakiaiFile("kietiakai.txt");
     ofstream vargsiukaiFile("vargsiukai.txt");
@@ -116,7 +116,7 @@ void generuotiRandom(Studentas& x, int nd_kiekis) {
     cout << "\nSugeneruotas egzamino pažymys: " << x.egz << "\n";
 }
 // Funkcija skirta perskaityti studento duomenis iš failo
-void skaitytiIsFailo(const string& failo_adresas, vector<Studentas>& studentai) {
+void skaitytiIsFailo(const string& failo_adresas, list<Studentas>& studentai) {
 
     auto start = high_resolution_clock::now();
 

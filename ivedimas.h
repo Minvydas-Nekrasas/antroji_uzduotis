@@ -13,7 +13,7 @@
 using namespace std;
 
 bool arTeisinga(const string& name);
-void nuskaitymas(vector<Studentas>& studentai);
+void nuskaitymas(list<Studentas>& studentai);
 
 
 #endif

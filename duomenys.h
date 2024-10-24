@@ -15,10 +15,10 @@
 #include <chrono>
 
 void generuotiRandom(Studentas& studentas, int nd_kiekis);
-void skaitytiIsFailo(const std::string& failo_adresas, std::vector<Studentas>& studentai);
+void skaitytiIsFailo(const string& failo_adresas, list<Studentas>& studentai);
 void generuotiDuomenis(int studentuSk, const string &failoPavadinimas);
-void skaiciavimai(vector<Studentas>& studentai, int choice);
-void padalintiStudentus(const vector<Studentas>& studentai, vector<Studentas>& kietiakiai, vector<Studentas>& vargsiukai);
-void isvestiIFailus(vector<Studentas>& kietiakai, vector<Studentas>& vargsiukai, int sort_choice);
+void skaiciavimai(list<Studentas>& studentai, int choice);
+void padalintiStudentus(const list<Studentas>& studentai, list<Studentas>& kietiakiai, list<Studentas>& vargsiukai);
+void isvestiIFailus(list<Studentas>& kietiakai, list<Studentas>& vargsiukai, int sort_choice);
 
 #endif

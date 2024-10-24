@@ -64,7 +64,7 @@ int main(){
     skaiciavimai(studentai, choice); // Apskaičiuojami galutiniai pažymiai
 
     // Rūšiuojam studentus į kietiakius ir vargšiukus
-    vector<Studentas> kietiakai, vargsiukai;
+    list<Studentas> kietiakai, vargsiukai;
     padalintiStudentus(studentai, kietiakai, vargsiukai);
 
     int sort_choice;

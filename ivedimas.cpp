@@ -10,7 +10,7 @@ bool arTeisinga(const string& name) {
     return true;
 }
 
-void nuskaitymas(vector<Studentas>& studentai) {
+void nuskaitymas(list<Studentas>& studentai) {
     string  input;
     int pazymys;
     cout << "Ar norite nuskaityti duomenis iš failo? (1 - Taip, 0 - Ne): ";

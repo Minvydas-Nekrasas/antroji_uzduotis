@@ -1,7 +1,7 @@
 #include "rezultatas.h"
 
 // Atspausdinam studentų duomenis
-void spausdinti(const vector<Studentas>& studentai, bool choice) {
+void spausdinti(const list<Studentas>& studentai, bool choice) {
     string pasirinkimas_pav;
     double pasirinkimas;
 
