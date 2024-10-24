@@ -58,7 +58,7 @@ void skaiciavimai(list<Studentas>& studentai, int choice) {
         }
     }
 }
-void padalintiStudentus(const list<Studentas>& studentai, list<Studentas>& kietiakiai, vector<Studentas>& vargsiukai) {
+void padalintiStudentus(const list<Studentas>& studentai, list<Studentas>& kietiakiai, list<Studentas>& vargsiukai) {
     auto start = high_resolution_clock::now();
     for (const auto& studentas : studentai) {
         if (studentas.galutinis >= 5.0) {

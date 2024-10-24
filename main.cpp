@@ -90,6 +90,33 @@ int main(){
     // Išvedimas į failus
     isvestiIFailus(kietiakai, vargsiukai, sort_choice);
 
+    // Pasirinkimas 0 spausdinti rezultatus terminale, 1 - baigti programą
+    int final_choice;
+    cout << "\nPasirinkite:\n";
+    cout << "0 - Spausdinti rezultatus į terminalą\n";
+    cout << "1 - Išeiti iš programos\n";
+
+    while (true) {
+        cout << "Įveskite pasirinkimą (0 arba 1): ";
+        if (!(cin >> final_choice) || (final_choice != 0 && final_choice != 1)) {
+            cout << "Įvestas neteisingas simbolis. Bandykite dar kartą.\n";
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            continue;
+        } else {
+            break;
+        }
+    }
+
+    if (final_choice == 0) {
+        // Spausdina rezultatus į terminalą
+        spausdinti(studentai, choice);
+    } else {
+        cout << "Programa baigta.\n";
+    }
+
+    return 0; // uždarom programą
+
     spausdinti(studentai, choice);
     
     return 0; //uždarom programą
