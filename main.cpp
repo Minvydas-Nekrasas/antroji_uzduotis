@@ -10,11 +10,12 @@
 #include <fstream>
 #include <random>
 #include <chrono>
+#include <list>
 
 using namespace std; // kad nereiktų rašyt std::string
 
 int main(){
-    vector<Studentas> studentai;
+    list<Studentas> studentai;
     int choice;
 
     cout << "\nPasirinkite ar norite sugeneruoti failus su atsitiktiniais duomenimis:\n";

@@ -11,10 +11,10 @@ string toLowerCase(const string& str) {
     return lowerStr;
 }
 // Funkcija studentų rikiavimui pagal vardą arba pavardę
-void rikiuotiStudentus(vector<Studentas>& studentai, int sort_choice) {
+void rikiuotiStudentus(list<Studentas>& studentai, int sort_choice) {
     if (sort_choice == 1) {
         // Rikiuojam pagal vardą
-        sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
+        studentai.sort([](const Studentas& a, const Studentas& b) {
             if (toLowerCase(a.vardas) == toLowerCase(b.vardas)) {
                 return toLowerCase(a.pavarde) < toLowerCase(b.pavarde);
             }
@@ -22,7 +22,7 @@ void rikiuotiStudentus(vector<Studentas>& studentai, int sort_choice) {
         });
     } else if (sort_choice == 0) {
         // Rikiuojam pagal pavardę
-        sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
+        studentai.sort([](const Studentas& a, const Studentas& b) {
             if (toLowerCase(a.pavarde) == toLowerCase(b.pavarde)) {
                 return toLowerCase(a.vardas) < toLowerCase(b.vardas);
             }
@@ -30,7 +30,7 @@ void rikiuotiStudentus(vector<Studentas>& studentai, int sort_choice) {
         });
     } else if (sort_choice == 2) {
         // Rikiuojam pagal galutinį pažymį
-        sort(studentai.begin(), studentai.end(), [](const Studentas& a, const Studentas& b) {
+        studentai.sort([](const Studentas& a, const Studentas& b) {
             return a.galutinis > b.galutinis; // Didžiausias pirmas
         });
     }

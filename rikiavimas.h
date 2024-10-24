@@ -3,10 +3,11 @@
 
 #include <string>
 #include <vector>
+#include <list>
 #include "studentas.h"
 using namespace std;
 
 string toLowerCase(const string& str);
-void rikiuotiStudentus(vector<Studentas>& studentai, int sort_choice);
+void rikiuotiStudentus(list<Studentas>& studentai, int sort_choice);
 
 #endif
