@@ -76,7 +76,7 @@ void isvestiIFailus(list<Studentas>& kietiakai, list<Studentas>& vargsiukai, int
     auto start = high_resolution_clock::now();
 
     // Open files
-    ofstream kietiakiaiFile("kietiakai.txt", ios::out | ios::trunc | ios::binary);
+    ofstream kietiakiaiFile("kietiakai.txt", ios::out | ios::trunc | ios::binary); // pagreitintas failų atidarymas
     ofstream vargsiukaiFile("vargsiukai.txt", ios::out | ios::trunc | ios::binary);
 
     // Rikiuojame tik vieną kartą po studentų padalijimo
