@@ -59,7 +59,7 @@ Projektas suskirstytas į kelis failus, kad būtų lengviau tvarkyti kodą:
       - studentų rūšiavimui į 2 kategorijas
       - surūšiuotų studentų išvedimui į du failus
 
-## Vidutiniai laiko spartos matavimai
+## Vidutiniai laiko spartos matavimai (vector)
 | **Studentų skaičius** | **Failo genravimas (sek)** | **Rūšiavimas į 2 kategorijas (sek)** | Išvedimas į 2 failus (sek) |
 |------------------|--------------------|-----------------------|----------------------|
 | 1,000            | 0.003             | 0.002                 | 0.015                |
@@ -77,7 +77,7 @@ Projektas suskirstytas į kelis failus, kad būtų lengviau tvarkyti kodą:
 # v0.3
 Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 
-## Vidutiniai laiko spartos matavimai
+## Vidutiniai laiko spartos matavimai (list)
 | **Studentų skaičius** | **Failo genravimas (sek)** | **Rūšiavimas į 2 kategorijas (sek)** | Išvedimas į 2 failus (sek) |
 |------------------|--------------------|-----------------------|----------------------|
 | 1,000            | 0.003             | 0.002                 | 0.007                |
