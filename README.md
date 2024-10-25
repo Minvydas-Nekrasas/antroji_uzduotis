@@ -87,6 +87,6 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 | 10,000,000       | 9.008            | 15.039                | 235.011               |
 
 ## Testavimo sistemos parametrai
-CPU - Intel Core i5-8265U
-RAM - 12 GB
-SSD - 238 GB NVMe KINGSTON
+- CPU - Intel Core i5-8265U
+- RAM - 12 GB
+- SSD - 238 GB NVMe KINGSTON
