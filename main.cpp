@@ -116,8 +116,4 @@ int main(){
     }
 
     return 0; // uždarom programą
-
-    spausdinti(studentai, choice);
-    
-    return 0; //uždarom programą
 }

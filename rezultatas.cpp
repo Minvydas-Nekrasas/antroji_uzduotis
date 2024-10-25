@@ -13,12 +13,12 @@ void spausdinti(const list<Studentas>& studentai, bool choice) {
 
     stringstream buffer;  // naudojam stringstream
 
-    buffer << "\n----------------------------------------------\n";
+    buffer << "\n--------------------------------------------------------------------------\n";
     buffer << left << setw(15) << "Pavardė"
            << setw(15) << "Vardas"
-           << "Galutinis "
-           << pasirinkimas_pav << endl;
-    buffer << "----------------------------------------------\n";
+           << "Galutinis "<< pasirinkimas_pav
+           << setw(10) << "" << "Adresas atmintyje" << endl;
+    buffer << "--------------------------------------------------------------------------\n";
 
     for (const auto& studentas : studentai) {
         if (choice == 0) {
@@ -29,7 +29,7 @@ void spausdinti(const list<Studentas>& studentai, bool choice) {
         buffer << left << setw(15) << studentas.pavarde
                << setw(15) << studentas.vardas
                << setw(20) << fixed << setprecision(2) << pasirinkimas
-               << endl;
+               << setw(10) << "" << &studentas << endl;
     }
 
     cout << buffer.str() << flush;  // visk1 atspausdinam vienu metu
