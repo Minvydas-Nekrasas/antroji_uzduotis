@@ -62,11 +62,11 @@ Projektas suskirstytas į kelis failus, kad būtų lengviau tvarkyti kodą:
 ## Vidutiniai laiko spartos matavimai
 | **Studentų skaičius** | **Failo genravimas (sek)** | **Rūšiavimas į 2 kategorijas (sek)** | Išvedimas į 2 failus (sek) |
 |------------------|--------------------|-----------------------|----------------------|
-| 1,000            | 0.0028             | 0.004                 | 0.010                |
-| 10,000           | 0.0294              | 0.811                 | 0.499                |
-| 100,000          | 0.2462            | 2.825                 | 0.176                |
-| 1,000,000        | 1.7686             | 3.529                 | 2.327                |
-| 10,000,000       | 12.1972            | 11.268                | 39.660               |
+| 1,000            | 0.003             | 0.002                 | 0.015                |
+| 10,000           | 0.018              | 0.387                 | 0.381                |
+| 100,000          | 0.123            | 1.858                 | 2.465                |
+| 1,000,000        | 1.222             | 2.732                 | 43.907                |
+| 10,000,000       | 11.796            | 11.149                | 435.121               |
 
 ## Naujos funkcijos:
 - generuotiDuomenis() -  generuojami 5 studentų failai (studentai_1000.txt, studentai_10000.txt, studentai_100000.txt, studentai_1000000.txt, studentai_10000000.txt)
