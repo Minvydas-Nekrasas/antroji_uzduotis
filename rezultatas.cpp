@@ -13,22 +13,24 @@ void spausdinti(const list<Studentas>& studentai, bool choice) {
 
     stringstream buffer;  // naudojam stringstream
 
-    buffer << "\n--------------------------------------------------------------------------\n";
-    buffer << left << setw(15) << "Pavardė"
-           << setw(15) << "Vardas"
-           << "Galutinis "<< pasirinkimas_pav
-           << setw(10) << "" << "Adresas atmintyje" << endl;
-    buffer << "--------------------------------------------------------------------------\n";
+    buffer << "\n-----------------------------------------------------------------------------------------------------------------------------------------\n";
+    buffer << left << setw(10) << "Pavardė"
+           << setw(10) << "" << "Adresas"
+           << setw(10) << "" << "Vardas"
+           << setw(10) << "" << "Adresas" 
+           << setw(10) << "" << "Galutinis "
+           << pasirinkimas_pav
+           << setw(10) << "" << "Adresas"
+           << setw(10) << "" << "Listo adresas" << endl;
+    buffer << "-----------------------------------------------------------------------------------------------------------------------------------------\n";
 
     for (const auto& studentas : studentai) {
-        if (choice == 0) {
-            pasirinkimas = vidurkis(studentas.nd, studentas.egz);
-        } else {
-            pasirinkimas = mediana(studentas.nd, studentas.egz);
-        }
-        buffer << left << setw(15) << studentas.pavarde
-               << setw(15) << studentas.vardas
-               << setw(20) << fixed << setprecision(2) << pasirinkimas
+        buffer << left << setw(10) << studentas.pavarde
+               << setw(10) << "" << &studentas.pavarde
+               << setw(10) << "" << studentas.vardas
+               << setw(10) << "" << &studentas.vardas
+               << setw(15) << "" << fixed << setprecision(2) << studentas.galutinis
+               << setw(20) << "" << &studentas.galutinis
                << setw(10) << "" << &studentas << endl;
     }
 
