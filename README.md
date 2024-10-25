@@ -59,17 +59,34 @@ Projektas suskirstytas į kelis failus, kad būtų lengviau tvarkyti kodą:
       - studentų rūšiavimui į 2 kategorijas
       - surūšiuotų studentų išvedimui į du failus
 
-## Vidutiniai laiko spartos matavimai
+## Vidutiniai laiko spartos matavimai (vector)
 | **Studentų skaičius** | **Failo genravimas (sek)** | **Rūšiavimas į 2 kategorijas (sek)** | Išvedimas į 2 failus (sek) |
 |------------------|--------------------|-----------------------|----------------------|
-| 1,000            | 0.0028             | 0.004                 | 0.010                |
-| 10,000           | 0.0294              | 0.811                 | 0.499                |
-| 100,000          | 0.2462            | 2.825                 | 0.176                |
-| 1,000,000        | 1.7686             | 3.529                 | 2.327                |
-| 10,000,000       | 12.1972            | 11.268                | 39.660               |
+| 1,000            | 0.003             | 0.002                 | 0.015                |
+| 10,000           | 0.018              | 0.387                 | 0.381                |
+| 100,000          | 0.123            | 1.858                 | 2.465                |
+| 1,000,000        | 1.222             | 2.732                 | 43.907                |
+| 10,000,000       | 11.796            | 11.149                | 435.121               |
 
 ## Naujos funkcijos:
 - generuotiDuomenis() -  generuojami 5 studentų failai (studentai_1000.txt, studentai_10000.txt, studentai_100000.txt, studentai_1000000.txt, studentai_10000000.txt)
 - skaiciavimai() - paskaičiuojamas vidurkis arba mediana kiekvienam studentui esančiam faile ir duomenys išsaugomi struktūroje
 - padalintiStudentus() - padalinami studentai į 2 kategorijas
 - isvestiIFailus() - išvedami studentai į du atskirus failus (kietiakai.txt, vargšiukai.txt)
+
+# v0.3
+Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
+
+## Vidutiniai laiko spartos matavimai (list)
+| **Studentų skaičius** | **Failo genravimas (sek)** | **Rūšiavimas į 2 kategorijas (sek)** | Išvedimas į 2 failus (sek) |
+|------------------|--------------------|-----------------------|----------------------|
+| 1,000            | 0.003             | 0.002                 | 0.007                |
+| 10,000           | 0.018              | 0.015                 | 0.065                |
+| 100,000          | 0.098            | 0.122                 | 0.828                |
+| 1,000,000        | 1.079             | 1.243                 | 3.727                |
+| 10,000,000       | 9.008            | 15.039                | 235.011               |
+
+## Testavimo sistemos parametrai
+- CPU - Intel Core i5-8265U
+- RAM - 12 GB
+- SSD - 238 GB NVMe KINGSTON
