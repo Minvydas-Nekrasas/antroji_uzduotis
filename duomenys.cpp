@@ -74,12 +74,16 @@ void padalintiStudentus(const list<Studentas>& studentai, list<Studentas>& kieti
 }
 void isvestiIFailus(list<Studentas>& kietiakai, list<Studentas>& vargsiukai, int sort_choice) {
     auto start = high_resolution_clock::now();
-    ofstream kietiakiaiFile("kietiakai.txt");
-    ofstream vargsiukaiFile("vargsiukai.txt");
 
+    // Open files
+    ofstream kietiakiaiFile("kietiakai.txt", ios::out | ios::trunc | ios::binary);
+    ofstream vargsiukaiFile("vargsiukai.txt", ios::out | ios::trunc | ios::binary);
+
+    // Rikiuojame tik vieną kartą po studentų padalijimo
     rikiuotiStudentus(kietiakai, sort_choice);
     rikiuotiStudentus(vargsiukai, sort_choice);
 
+    // Naudojame vieną eilutę ir appendiname ją su '\n' vietoje dažno endl naudojimo.
     kietiakiaiFile << "Pavarde Vardas Galutinis Balas\n";
     for (const auto& studentas : kietiakai) {
         kietiakiaiFile << studentas.pavarde << " " << studentas.vardas << " " << studentas.galutinis << "\n";
@@ -98,6 +102,7 @@ void isvestiIFailus(list<Studentas>& kietiakai, list<Studentas>& vargsiukai, int
     double duration_sec = duration_ms.count() / 1000.0;
     cout << "Failų išvedimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
 }
+
 
 // Funkcija atsitiktinių rezultatų generavimui
 void generuotiRandom(Studentas& x, int nd_kiekis) {
