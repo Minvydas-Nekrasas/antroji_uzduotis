@@ -73,3 +73,15 @@ Projektas suskirstytas į kelis failus, kad būtų lengviau tvarkyti kodą:
 - skaiciavimai() - paskaičiuojamas vidurkis arba mediana kiekvienam studentui esančiam faile ir duomenys išsaugomi struktūroje
 - padalintiStudentus() - padalinami studentai į 2 kategorijas
 - isvestiIFailus() - išvedami studentai į du atskirus failus (kietiakai.txt, vargšiukai.txt)
+
+# v0.3
+Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
+
+## Vidutiniai laiko spartos matavimai
+| **Studentų skaičius** | **Failo genravimas (sek)** | **Rūšiavimas į 2 kategorijas (sek)** | Išvedimas į 2 failus (sek) |
+|------------------|--------------------|-----------------------|----------------------|
+| 1,000            | 0.003             | 0.002                 | 0.007                |
+| 10,000           | 0.018              | 0.015                 | 0.065                |
+| 100,000          | 0.098            | 0.122                 | 0.828                |
+| 1,000,000        | 1.079             | 1.243                 | 3.727                |
+| 10,000,000       | 9.008            | 15.039                | 235.011               |
