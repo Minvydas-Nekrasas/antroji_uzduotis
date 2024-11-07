@@ -47,7 +47,7 @@ void generuotiDuomenis(int studentuSk, const string &failoPavadinimas) {
 
 
     cout << "Sugeneruotas failas: " << failoPavadinimas << " su " << studentuSk << " studentais.\n";
-    cout << "Sugeneravimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
+    cout << "Sugeneravimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundes\n";
 }
 void skaiciavimai(vector<Studentas>& studentai, int choice) {
     for (auto& studentas : studentai) {
@@ -70,7 +70,7 @@ void padalintiStudentus(const vector<Studentas>& studentai, vector<Studentas>& k
     auto end = high_resolution_clock::now();
     auto duration_ms = duration_cast<milliseconds>(end - start);
     double duration_sec = duration_ms.count() / 1000.0;
-    cout << "Padalinimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
+    cout << "Padalinimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundes\n";
 }
 void isvestiIFailus(vector<Studentas>& kietiakai, vector<Studentas>& vargsiukai, int sort_choice) {
     auto start = high_resolution_clock::now();
@@ -96,7 +96,7 @@ void isvestiIFailus(vector<Studentas>& kietiakai, vector<Studentas>& vargsiukai,
     auto end = high_resolution_clock::now();
     auto duration_ms = duration_cast<milliseconds>(end - start);
     double duration_sec = duration_ms.count() / 1000.0;
-    cout << "Failų išvedimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
+    cout << "Failu isvedimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundes\n";
 }
 
 // Funkcija atsitiktinių rezultatų generavimui
@@ -105,7 +105,7 @@ void generuotiRandom(Studentas& x, int nd_kiekis) {
     mt19937 gen(rd());
     uniform_int_distribution<> dist(1, 10);  // Pažymiai generuojami nuo 1 iki 10
 
-    std::cout << "Atsitiktinai sugeneruoti namų darbų pažymiai: ";
+    std::cout << "Atsitiktinai sugeneruoti namu darbu pazymiai: ";
     for (int i = 0; i < nd_kiekis; i++) {
         int random_pazymys = dist(gen);
         x.nd.push_back(random_pazymys);
@@ -113,7 +113,7 @@ void generuotiRandom(Studentas& x, int nd_kiekis) {
     }
 
     x.egz = dist(gen);  // Atsitinktinai sugeneruojame ir egzamino pažymį
-    cout << "\nSugeneruotas egzamino pažymys: " << x.egz << "\n";
+    cout << "\nSugeneruotas egzamino pazymys: " << x.egz << "\n";
 }
 // Funkcija skirta perskaityti studento duomenis iš failo
 void skaitytiIsFailo(const string& failo_adresas, vector<Studentas>& studentai) {
@@ -151,5 +151,5 @@ void skaitytiIsFailo(const string& failo_adresas, vector<Studentas>& studentai) 
     auto end = high_resolution_clock::now();
     auto duration_ms = duration_cast<milliseconds>(end - start);
     double duration_sec = duration_ms.count() / 1000.0;
-    cout << "Failo nuskaitymo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
+    cout << "Failo nuskaitymo laikas: " << fixed << setprecision(3) << duration_sec << " sekundes\n";
 }

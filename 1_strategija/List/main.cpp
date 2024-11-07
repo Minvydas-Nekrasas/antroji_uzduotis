@@ -22,9 +22,9 @@ int main(){
     cout << "0 - Sugeneruoti failus\n";
     cout << "1 - Ne\n";
     while (true) {
-        cout << "Įveskite pasirinkimą (0 arba 1): ";
+        cout << "Iveskite pasirinkima (0 arba 1): ";
         if (!(cin >> choice) || (choice != 0 && choice != 1)) {
-            cout << "Įvestas neteisingas simbolis. Bandykite dar kartą.\n";
+            cout << "Ivestas neteisingas simbolis. Bandykite dar karta.\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
@@ -44,14 +44,14 @@ int main(){
 
     nuskaitymas(studentai);
 
-    cout << "\nPasirinkite, ką norite apskaičiuoti:\n";
-    cout << "0 - Galutinis pažymys pagal vidurkį\n";
-    cout << "1 - Galutinis pažymys pagal medianą\n";
+    cout << "\nPasirinkite, ka norite apskaiciuoti:\n";
+    cout << "0 - Galutinis pazymys pagal vidurki\n";
+    cout << "1 - Galutinis pazymys pagal mediana\n";
 
     while(true){
-        cout << "Įveskite pasirinkimą (1 arba 0): ";
+        cout << "Iveskite pasirinkima (1 arba 0): ";
         if(!(cin >> choice)||(choice != 0 && choice != 1)){
-            cout << "Įvestas neteisingas simbolis. Bandykite dar kartą.\n";
+            cout << "Ivestas neteisingas simbolis. Bandykite dar karta.\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
@@ -68,15 +68,15 @@ int main(){
     padalintiStudentus(studentai, kietiakai, vargsiukai);
 
     int sort_choice;
-    cout << "\nPasirinkite, pagal ką norite surikiuoti studentus:\n";
-    cout << "0 - Rikiuoti pagal pavardę\n";
-    cout << "1 - Rikiuoti pagal vardą\n";
-    cout << "2 - Rikiuoti pagal galutinį pažymį\n";
+    cout << "\nPasirinkite, pagal ka norite surikiuoti studentus:\n";
+    cout << "0 - Rikiuoti pagal pavarde\n";
+    cout << "1 - Rikiuoti pagal varda\n";
+    cout << "2 - Rikiuoti pagal galutini pazymi\n";
 
     while (true) {
-        cout << "Įveskite pasirinkimą (0, 1 arba 2): ";
+        cout << "Iveskite pasirinkima (0, 1 arba 2): ";
         if (!(cin >> sort_choice) || (sort_choice < 0 || sort_choice > 2)) { // Priimam 0, 1 or 2
-            cout << "Įvestas neteisingas simbolis. Bandykite dar kartą.\n";
+            cout << "Ivestas neteisingas simbolis. Bandykite dar karta.\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
@@ -93,13 +93,13 @@ int main(){
     // Pasirinkimas 0 spausdinti rezultatus terminale, 1 - baigti programą
     int final_choice;
     cout << "\nPasirinkite:\n";
-    cout << "0 - Spausdinti rezultatus į terminalą\n";
-    cout << "1 - Išeiti iš programos\n";
+    cout << "0 - Spausdinti rezultatus i terminala\n";
+    cout << "1 - Iseiti is programos\n";
 
     while (true) {
-        cout << "Įveskite pasirinkimą (0 arba 1): ";
+        cout << "Iveskite pasirinkima (0 arba 1): ";
         if (!(cin >> final_choice) || (final_choice != 0 && final_choice != 1)) {
-            cout << "Įvestas neteisingas simbolis. Bandykite dar kartą.\n";
+            cout << "Ivestas neteisingas simbolis. Bandykite dar karta.\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;

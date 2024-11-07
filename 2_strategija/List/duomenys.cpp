@@ -104,7 +104,7 @@ void isvestiIFailus(list<Studentas>& studentai, list<Studentas>& vargsiukai, int
     auto end = high_resolution_clock::now();
     auto duration_ms = duration_cast<milliseconds>(end - start);
     double duration_sec = duration_ms.count() / 1000.0;
-    cout << "Failu isvedimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
+    cout << "Failu isvedimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundes\n";
 }
 
 // Funkcija atsitiktinių rezultatų generavimui
