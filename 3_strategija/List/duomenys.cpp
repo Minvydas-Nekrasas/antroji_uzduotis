@@ -62,14 +62,14 @@ void padalintiStudentus(list<Studentas>& studentai, list<Studentas>& vargsiukai)
     auto start = high_resolution_clock::now();
     
     // Naudojame iteratorių, kad galėtume iteruoti ir trinti elementus iš sąrašo
-    for (auto it = studentai.begin(); it != studentai.end();) {
-        if (it->galutinis < 5.0) {
-            vargsiukai.push_back(*it); // Pridedame į "vargšiukai" sąrašą
-            it = studentai.erase(it);  // Ištrinome iš "studentai" sąrašo ir atnaujiname iteratorių
-        } else {
-            ++it; // Jei tai "kietiakas", tiesiog pereiname prie kito elemento
-        }
-    }
+    // Use std::partition to separate "vargšiukai" and "kietiakai" in place
+    
+    auto it = partition(studentai.begin(), studentai.end(), [](const Studentas& s) {
+        return s.galutinis >= 5.0;
+    });
+
+    // Transfer "vargšiukai" to the separate list and remove from the original
+    vargsiukai.splice(vargsiukai.begin(), studentai, it, studentai.end());
     
     auto end = high_resolution_clock::now();
     auto duration_ms = duration_cast<milliseconds>(end - start);

@@ -58,16 +58,21 @@ void skaiciavimai(vector<Studentas>& studentai, int choice) {
         }
     }
 }
-void padalintiStudentus(const vector<Studentas>& studentai, vector<Studentas>& kietiakiai, vector<Studentas>& vargsiukai) {
+void padalintiStudentus(vector<Studentas>& studentai, vector<Studentas>& kietiakiai, vector<Studentas>& vargsiukai) {
     auto start = high_resolution_clock::now();
-    for (const auto& studentas : studentai) {
+    
+    // Use std::partition_copy to divide students in one pass
+    stable_partition(studentai.begin(), studentai.end(), [&kietiakiai, &vargsiukai](const Studentas& studentas) {
         if (studentas.galutinis >= 5.0) {
             kietiakiai.push_back(studentas);
+            return true;
         } else {
             vargsiukai.push_back(studentas);
+            return false;
         }
-    }
-    auto end = high_resolution_clock::now();
+    });
+
+    auto end = std::chrono::high_resolution_clock::now();
     auto duration_ms = duration_cast<milliseconds>(end - start);
     double duration_sec = duration_ms.count() / 1000.0;
     cout << "Padalinimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundes\n";

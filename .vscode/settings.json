@@ -4,6 +4,9 @@
         "iostream": "cpp",
         "vector": "cpp",
         "limits": "cpp",
-        "istream": "cpp"
+        "istream": "cpp",
+        "list": "cpp",
+        "algorithm": "cpp",
+        "xutility": "cpp"
     }
 }
