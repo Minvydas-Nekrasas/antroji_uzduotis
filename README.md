@@ -118,7 +118,7 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 |------------------------|----------------------------------|------------------------|-----------------------------------|
 | 1_strategija vektoriai | 1.188                        | 1.858              | 2.465                          |
 | 1_strategija listai    | 1.177                        | 0.122              | 1.301                          |
-| 2_strategija vektoriai | 1.188                        | 0.000626              | 0.000333                          |
+| 2_strategija vektoriai | 1.188                        | 218.594              | 3.283                          |
 | 2_strategija listai    | 1.177                        | 0.039              | 1.165                          |
 | list su partition      | 1.188                        | 0.000740              | 0.000280                          |
 | partition vektoriai    | 1.177                        | 0.000202              | 0.000378                          |
@@ -128,7 +128,7 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 |------------------------|----------------------------------|------------------------|-----------------------------------|
 | 1_strategija vektoriai | 9.692                        | 2.732              | 43.907                          |
 | 1_strategija listai    | 10.064                        | 1.243              | 15.966                          |
-| 2_strategija vektoriai | 9.692                        | 0.000626              | 0.000333                          |
+| 2_strategija vektoriai | 9.692                        | 21 680              | 51.273                          |
 | 2_strategija listai    | 10.064                        | 0.310              | 15.213                          |
 | list su partition      | 9.692                        | 0.000740              | 0.000280                          |
 | partition vektoriai    | 10.064                        | 0.000202              | 0.000378                          |
@@ -138,7 +138,7 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 |------------------------|----------------------------------|------------------------|-----------------------------------|
 | 1_strategija vektoriai | 270.540                        | 11.149              | 435.121                          |
 | 1_strategija listai    | 270.104                        | 15.039              | 235.011                          |
-| 2_strategija vektoriai | 270.540                        | 0.000626              | 0.000333                          |
+| 2_strategija vektoriai | 270.540                        | 21 859 400            | 498.332                          |
 | 2_strategija listai    | 270.104                        | 4.171              | 145.376                          |
 | list su partition      | 270.540                        | 0.000740              | 0.000280                          |
 | partition vektoriai    | 270.104                        | 0.000202              | 0.000378                          |
