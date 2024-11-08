@@ -30,11 +30,11 @@ Projektas suskirstytas į kelis failus, kad būtų lengviau tvarkyti kodą:
 1. Nuklonuojame repozitoriją:
 
        git clone https://github.com/Minvydas-Nekrasas/pirmoji_uzduotis/
-       cd pirmoji_uzduotis
+       cd "[direktorija]"
    
 3. Sukompiliuojame kodą:
 
-       g++ -std=c++11 *.cpp -o vertinimas
+       g++ *.cpp -o vertinimas
    
 5. Paleidžiame programą:
 
