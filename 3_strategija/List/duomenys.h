@@ -13,6 +13,7 @@
 #include <sstream>
 #include <iomanip>
 #include <chrono>
+#include <algorithm>
 
 void generuotiRandom(Studentas& studentas, int nd_kiekis);
 void skaitytiIsFailo(const string& failo_adresas, list<Studentas>& studentai);
