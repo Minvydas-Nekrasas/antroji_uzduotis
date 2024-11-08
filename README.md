@@ -26,17 +26,34 @@ Projektas suskirstytas į kelis failus, kad būtų lengviau tvarkyti kodą:
 - rezultatas.cpp ir rezultatas.h - funkcija skirta rezultato išvedimui.
 ## Kompiliavimas ir Paleidimas
 
->Sukompiliuoti programą galite su šia komanda:
->
->```bash
->g++ *.cpp -o studentu_rezultatai
->```
->
->Paleisti programą galite su šia komanda:
->
->```bash
->./studentu_rezultatai
->```
+### Naudojant kompiliatorių:
+1. Nuklonuojame repozitoriją:
+
+       git clone https://github.com/Minvydas-Nekrasas/pirmoji_uzduotis/
+       cd pirmoji_uzduotis
+   
+3. Sukompiliuojame kodą:
+
+       g++ -std=c++11 *.cpp -o vertinimas
+   
+5. Paleidžiame programą:
+
+       ./vertinimas
+### Naudojant cmake:
+1. Terminale nurodome direktorija, kur egzistuoja projekto CMakeLists.txt failas, sukuriam build failams skirta direktorija :
+
+       cd "[direktorija]"
+       mkdir build
+       cd build
+
+2. Paleidžiame cmake, kad sugeneruoti build failus, nurodome jau minėta direktorija:
+        
+       cmake "[direktorija]"
+   
+4. Sukompiliuojame ir sukuriame .exe failą, taip pat galime pasirinkt konfigurijacija: Release arba Debug:
+
+       cmake --build . --config [Release arba Debug]
+
 ## Naudojimas
 1. Programa paklaus, ar norite įvesti duomenis iš failo, ar rankiniu būdu.
 2. Rankiniu būdu įvedus duomenis, galima pasirinkti, ar sugeneruoti pažymius atsitiktinai, ar įvesti juos ranka.
@@ -92,6 +109,17 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 - SSD - 238 GB NVMe KINGSTON
 
 # Studentų Rezultatų Skaičiavimo Sistema (v1.0)
+## Tikslas
+Šios versijos tikslas - išanalizuoti geriausius rūšiavimo algoritmus abiems studentų konteinerių tipams (Vector ir list) ir patobulinti juos.
+## Failų struktūra
+Šioje versijoje yra trys rūšiavimo strategijos:
+- Strategija_1 - Bendro studentai konteinerio (vector ir list tipų) skaidymas (rūšiavimas) į du naujus to paties tipo konteinerius: "vargšiukų" ir "kietiakų".
+- Strategija_2 - Bendro studentų konteinerio (vector ir list) skaidymas (rūšiavimas) panaudojant tik vieną naują konteinerį: "vargšiukai". 
+- Strategija_3 (patobulinimas) - Bendro studentų konteinerio skaidymas (rūšiavimas) panaudojant greičiausiai veikiančią strategiją Vector ir List konteineriams, įtraukiant į ją partition (List) ir stable_partition (Vector) algoritmus.
+## Rezultatai
+Sukurti trys aplankai: Strategija_1, Strategija_2 ir Strategija_3, kuriuose yra po dar du aplankus: Vector ir List. Vector aplankas turi kodą, kur naudojamas Vector studentų konteinerio tipas, analogiškai List - List konteinerio tipas.
+
+Atlikus pirmą ir antrą strategiją buvo pastebėta, kad pirmoji strategija tiko vektoriaus tipui, o antroji listo tipui. 3 strategijoje buvo pritaikyta pirma strategija ir stable_partition funkcija vektoriaus konteinerio tipui, o listui buvo panaudota antroji strategija ir atliktas rūšiavimo optimizavimas su partition funkcija. Laiko išmatavimai pateikti žemiau.
 ## Vidutiniai laiko spartos matavimai
 ### 1000
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
