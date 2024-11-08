@@ -29,7 +29,7 @@ Projektas suskirstytas į kelis failus, kad būtų lengviau tvarkyti kodą:
 >Sukompiliuoti programą galite su šia komanda:
 >
 >```bash
->g++ main.cpp ivedimas.cpp duomenys.cpp vertinimas.cpp rikiavimas.cpp rezultatas.cpp -o studentu_rezultatai
+>g++ *.cpp -o studentu_rezultatai
 >```
 >
 >Paleisti programą galite su šia komanda:
@@ -100,8 +100,8 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 | 1_strategija listai    | 0.005                        | 0.002              | 0.015                          |
 | 2_strategija vektoriai | 0.005                        | 0.053              | 0.030                          |
 | 2_strategija listai    | 0.005                        | 0.000              | 0.015                          |
-| list su partition      | 0.005                        | 0.000740              | 0.000280                          |
-| partition vektoriai    | 0.005                        | 0.000202              | 0.000378                          |
+| list su partition      | 0.005                        | 0.000              | 0.007                          |
+| stable_partition vektoriai    | 0.005                        | 0.001              | 0.017                          |
 
 ### 10 000
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
@@ -110,8 +110,8 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 | 1_strategija listai    | 0.161                        | 0.015              | 0.123                          |
 | 2_strategija vektoriai | 0.160                        | 2.468              | 0.368                          |
 | 2_strategija listai    | 0.161                        | 0.003              | 0.121                          |
-| list su partition      | 0.160                        | 0.000740              | 0.000280                          |
-| partition vektoriai    | 0.161                        | 0.000202              | 0.000378                          |
+| list su partition      | 0.160                        | 0.000              | 0.066                          |
+| partition vektoriai    | 0.161                        | 0.011              | 0.243                          |
 
 ### 100 000
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
@@ -120,8 +120,8 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 | 1_strategija listai    | 1.177                        | 0.122              | 1.301                          |
 | 2_strategija vektoriai | 1.188                        | 218.594              | 3.283                          |
 | 2_strategija listai    | 1.177                        | 0.039              | 1.165                          |
-| list su partition      | 1.188                        | 0.000740              | 0.000280                          |
-| partition vektoriai    | 1.177                        | 0.000202              | 0.000378                          |
+| list su partition      | 1.188                        | 0.012              | 0.885                          |
+| partition vektoriai    | 1.177                        | 0.052              | 3.621                          |
 
 ### 1 000 000
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
@@ -130,8 +130,8 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 | 1_strategija listai    | 10.064                        | 1.243              | 15.966                          |
 | 2_strategija vektoriai | 9.692                        | 21 680              | 51.273                          |
 | 2_strategija listai    | 10.064                        | 0.310              | 15.213                          |
-| list su partition      | 9.692                        | 0.000740              | 0.000280                          |
-| partition vektoriai    | 10.064                        | 0.000202              | 0.000378                          |
+| list su partition      | 9.692                        | 0.112              | 14.410                          |
+| partition vektoriai    | 10.064                        | 0.562              | 37.504                          |
 
 ### 10 000 000
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
@@ -140,5 +140,5 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 | 1_strategija listai    | 270.104                        | 15.039              | 235.011                          |
 | 2_strategija vektoriai | 270.540                        | 21 859 400            | 498.332                          |
 | 2_strategija listai    | 270.104                        | 4.171              | 145.376                          |
-| list su partition      | 270.540                        | 0.000740              | 0.000280                          |
-| partition vektoriai    | 270.104                        | 0.000202              | 0.000378                          |
+| list su partition      | 270.540                        | 1.162              | 176.744                          |
+| partition vektoriai    | 270.104                        | 7.126              | 537.426                          |
