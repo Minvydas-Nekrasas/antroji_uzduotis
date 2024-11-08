@@ -83,10 +83,62 @@ Vietoje std::vector<Studentai> naudojame std::list<Studentai>.
 | 1,000            | 0.003             | 0.002                 | 0.007                |
 | 10,000           | 0.018              | 0.015                 | 0.065                |
 | 100,000          | 0.098            | 0.122                 | 0.828                |
-| 1,000,000        | 1.079             | 1.243                 | 3.727                |
+| 1,000,000        | 1.079             | 1.243                 | 15.966                |
 | 10,000,000       | 9.008            | 15.039                | 235.011               |
 
 ## Testavimo sistemos parametrai
 - CPU - Intel Core i5-8265U
 - RAM - 12 GB
 - SSD - 238 GB NVMe KINGSTON
+
+# Studentų Rezultatų Skaičiavimo Sistema (v1.0)
+## Vidutiniai laiko spartos matavimai
+### 1000
+|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
+|------------------------|----------------------------------|------------------------|-----------------------------------|
+| 1_strategija vektoriai | 0.005                        | 0.002              | 0.015                          |
+| 1_strategija listai    | 0.005                        | 0.002              | 0.015                          |
+| 2_strategija vektoriai | 0.005                        | 0.053              | 0.030                          |
+| 2_strategija listai    | 0.005                        | 0.000              | 0.015                          |
+| list su partition      | 0.005                        | 0.000740              | 0.000280                          |
+| partition vektoriai    | 0.005                        | 0.000202              | 0.000378                          |
+
+### 10 000
+|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
+|------------------------|----------------------------------|------------------------|-----------------------------------|
+| 1_strategija vektoriai | 0.160                        | 0.387              | 0.381                          |
+| 1_strategija listai    | 0.161                        | 0.015              | 0.123                          |
+| 2_strategija vektoriai | 0.160                        | 2.468              | 0.368                          |
+| 2_strategija listai    | 0.161                        | 0.003              | 0.121                          |
+| list su partition      | 0.160                        | 0.000740              | 0.000280                          |
+| partition vektoriai    | 0.161                        | 0.000202              | 0.000378                          |
+
+### 100 000
+|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
+|------------------------|----------------------------------|------------------------|-----------------------------------|
+| 1_strategija vektoriai | 1.188                        | 1.858              | 2.465                          |
+| 1_strategija listai    | 1.177                        | 0.122              | 1.301                          |
+| 2_strategija vektoriai | 1.188                        | 218.594              | 3.283                          |
+| 2_strategija listai    | 1.177                        | 0.039              | 1.165                          |
+| list su partition      | 1.188                        | 0.000740              | 0.000280                          |
+| partition vektoriai    | 1.177                        | 0.000202              | 0.000378                          |
+
+### 1 000 000
+|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
+|------------------------|----------------------------------|------------------------|-----------------------------------|
+| 1_strategija vektoriai | 9.692                        | 2.732              | 43.907                          |
+| 1_strategija listai    | 10.064                        | 1.243              | 15.966                          |
+| 2_strategija vektoriai | 9.692                        | 21 680              | 51.273                          |
+| 2_strategija listai    | 10.064                        | 0.310              | 15.213                          |
+| list su partition      | 9.692                        | 0.000740              | 0.000280                          |
+| partition vektoriai    | 10.064                        | 0.000202              | 0.000378                          |
+
+### 10 000 000
+|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
+|------------------------|----------------------------------|------------------------|-----------------------------------|
+| 1_strategija vektoriai | 270.540                        | 11.149              | 435.121                          |
+| 1_strategija listai    | 270.104                        | 15.039              | 235.011                          |
+| 2_strategija vektoriai | 270.540                        | 21 859 400            | 498.332                          |
+| 2_strategija listai    | 270.104                        | 4.171              | 145.376                          |
+| list su partition      | 270.540                        | 0.000740              | 0.000280                          |
+| partition vektoriai    | 270.104                        | 0.000202              | 0.000378                          |
