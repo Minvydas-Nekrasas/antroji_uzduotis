@@ -11,56 +11,58 @@ bool arTeisinga(const string& name) {
 }
 
 void nuskaitymas(list<Studentas>& studentai) {
-    string  input;
+    string input;
     int pazymys;
     cout << "Ar norite nuskaityti duomenis is failo? (1 - Taip, 0 - Ne): ";
     int readFromFile;
     cin >> readFromFile;
 
     if (readFromFile == 1) {
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear newline after input
         string failo_adresas;
         while (true) {
             cout << "Iveskite failo adresa: ";
             getline(cin, failo_adresas);
 
-            ifstream file(failo_adresas);  // Bandom atidaryti
+            ifstream file(failo_adresas);  // Try opening the file
             if (file.is_open()) {
-                file.close();  // Jei atsidaro, uždarom
-                skaitytiIsFailo(failo_adresas, studentai);
-                break;  // Išeinam iš ciklo
+                file.close();  // If successful, close the file
+                skaitytiIsFailo(failo_adresas, studentai); // Load data from the file
+                break;  // Exit loop after successful loading
             } else {
                 cout << "Nepavyko atidaryti failo! Bandykite dar karta.\n";
             }
         }
     } else {
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear newline from previous input
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear newline after input
         cout << "Noredami baigti ivesti studentus, paspauskite ENTER du kartus.\n";
 
         while (true) {
             Studentas x;
-            
-            // Imame studento vardą
+
+            // Get student's first name
             cout << "\nIrasykite studento varda (ne daugiau nei 10 simboliu) arba paspauskite ENTER, kad baigtumete: ";
-            getline(cin, x.vardas);
-            if (x.vardas.empty()) break; // Stabdom, jei enter paspaustas 2 kart
-            
-            if (!arTeisinga(x.vardas)) {
+            getline(cin, input);
+            if (input.empty()) break; // Stop if ENTER pressed twice
+
+            if (!arTeisinga(input)) {
                 cout << "Netinkamas vardas. Bandykite dar karta.\n";
                 continue;
             }
+            x.setVardas(input);  // Set student's first name using setter
 
-            // Imame studento pavardę
+            // Get student's last name
             cout << "Irasykite studento pavarde (ne daugiau nei 10 simboliu): ";
-            getline(cin, x.pavarde);
-            if (x.pavarde.empty()) break; // Stabdom, jei enter paspaustas 2 kart
-            
-            if (!arTeisinga(x.pavarde)) {
+            getline(cin, input);
+            if (input.empty()) break; // Stop if ENTER pressed twice
+
+            if (!arTeisinga(input)) {
                 cout << "Netinkama pavarde. Bandykite dar karta.\n";
                 continue;
             }
+            x.setPavarde(input);  // Set student's last name using setter
 
-            // Klausia, kokio suvedimo norime
+            // Ask if random grades should be generated
             int choice;
             cout << "Ar norite atsitiktinai sugeneruoti namu darbu ir egzamino pazymius?\n";
             cout << "0 - Ne, ivesiu ranka\n";
@@ -79,20 +81,20 @@ void nuskaitymas(list<Studentas>& studentai) {
             }
             
             if (choice == 1) {
-                // Sugeneruojam atsitiktinus namų darbų ir egzamino rezultatus
+                // Generate random grades for homework and exam
                 int nd_kiekis;
                 cout << "Kiek norite sugeneruoti namu darbu pazymiu? (Ne daugiau nei 10 000): ";
                 while (!(cin >> nd_kiekis) || nd_kiekis < 0 || nd_kiekis > 10000) {
                     cout << "Iveskite teisinga skaiciu: ";
                     cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // pravalom netinkamą atsakymą
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear invalid input
                 }
 
-                generuotiRandom(x, nd_kiekis);  // Kviečiam funkciją
+                generuotiRandom(x, nd_kiekis);  // Generate random grades for the student
 
                 cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
             } else {
-                // Suvedame namų darbų rezultatus rankiniu būdu
+                // Manually enter homework grades
                 cout << "Irasykite namu darbu pazymius (nuo 0 iki 10). Noredami baigti ivesti pazymius, paspauskite ENTER:\n";
                 
                 while (true) {
@@ -105,7 +107,7 @@ void nuskaitymas(list<Studentas>& studentai) {
                         if (pazymys < 0 || pazymys > 10) {
                             throw out_of_range("Pazymys turi buti tarp 0 ir 10.");
                         }
-                        x.nd.push_back(pazymys);
+                        x.addNd(pazymys);  // Add grade using the setter method
                     } catch (invalid_argument&) {
                         cout << "Iveskite teisinga pazymi (skaiciu nuo 0 iki 10).\n";
                     } catch (out_of_range& e) {
@@ -113,15 +115,16 @@ void nuskaitymas(list<Studentas>& studentai) {
                     }
                 }
 
-                // Imame egzamino rezultatą
+                // Get the exam grade
                 cout << "Irasykite egzamino pazymi: ";
                 while (true) {
                     getline(cin, input);
                     try {
-                        x.egz = stoi(input);
-                        if (x.egz < 0 || x.egz > 10) {
+                        pazymys = stoi(input);
+                        if (pazymys < 0 || pazymys > 10) {
                             throw out_of_range("Egzamino pazymys turi buti tarp 0 ir 10.");
                         }
+                        x.setEgz(pazymys);  // Set exam grade using setter
                         break;
                     } catch (invalid_argument&) {
                         cout << "Iveskite teisinga egzamino pazymi (skaiciu nuo 0 iki 10).\n";
@@ -131,7 +134,7 @@ void nuskaitymas(list<Studentas>& studentai) {
                 }
             }
 
-            studentai.push_back(x);  // įdedam studentą į vektorių
+            studentai.push_back(x);  // Add student to the list
         }
     }
 }
