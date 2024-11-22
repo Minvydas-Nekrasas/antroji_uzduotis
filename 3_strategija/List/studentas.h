@@ -36,7 +36,8 @@ public:
     int getEgz() const { return egz; }
     void setEgz(int e) { egz = e; calculateGalutinis(); }
 
-    double getGalutinis() const { return galutinis; }
+    double& getGalutinis() { return galutinis; } // Non-const version
+    const double& getGalutinis() const { return galutinis; } // Const version
 
     // Methods
     void calculateGalutinis() {

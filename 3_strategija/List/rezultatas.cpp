@@ -1,9 +1,13 @@
 #include "rezultatas.h"
+#include <iomanip>
+#include <sstream>
+#include <iostream>
+
+using namespace std;
 
 // Atspausdinam studentų duomenis
 void spausdinti(const list<Studentas>& studentai, bool choice) {
     string pasirinkimas_pav;
-    double pasirinkimas;
 
     if (choice == 0) {
         pasirinkimas_pav = "(Vid.)";
@@ -25,14 +29,14 @@ void spausdinti(const list<Studentas>& studentai, bool choice) {
     buffer << "-----------------------------------------------------------------------------------------------------------------------------------------\n";
 
     for (const auto& studentas : studentai) {
-        buffer << left << setw(10) << studentas.pavarde
-               << setw(10) << "" << &studentas.pavarde
-               << setw(10) << "" << studentas.vardas
-               << setw(10) << "" << &studentas.vardas
-               << setw(15) << "" << fixed << setprecision(2) << studentas.galutinis
-               << setw(20) << "" << &studentas.galutinis
+        buffer << left << setw(10) << studentas.getPavarde()
+               << setw(10) << "" << &studentas.getPavarde()
+               << setw(10) << "" << studentas.getVardas()
+               << setw(10) << "" << &studentas.getVardas()
+               << setw(15) << "" << fixed << setprecision(2) << studentas.getGalutinis()
+               << setw(20) << "" << &studentas.getGalutinis()
                << setw(10) << "" << &studentas << endl;
     }
 
-    cout << buffer.str() << flush;  // visk1 atspausdinam vienu metu
+    cout << buffer.str() << flush;  // viską atspausdinam vienu metu
 }
