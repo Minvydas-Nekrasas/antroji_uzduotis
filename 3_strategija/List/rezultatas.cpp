@@ -30,12 +30,8 @@ void spausdinti(const list<Studentas>& studentai, bool choice) {
 
     for (const auto& studentas : studentai) {
         buffer << left << setw(10) << studentas.getPavarde()
-               << setw(10) << "" << &studentas.getPavarde()
                << setw(10) << "" << studentas.getVardas()
-               << setw(10) << "" << &studentas.getVardas()
-               << setw(15) << "" << fixed << setprecision(2) << studentas.getGalutinis()
-               << setw(20) << "" << &studentas.getGalutinis()
-               << setw(10) << "" << &studentas << endl;
+               << setw(15) << "" << fixed << setprecision(2) << studentas.getGalutinis()<< endl;
     }
 
     cout << buffer.str() << flush;  // viską atspausdinam vienu metu

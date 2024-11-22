@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <limits> //numeric_limits
+#include <limits> // numeric_limits
 #include <vector>
 #include "duomenys.h"
 #include "ivedimas.h"
@@ -12,12 +12,13 @@
 #include <chrono>
 #include <list>
 
-using namespace std; // kad nereiktų rašyt std::string
+using namespace std; // so that std::string can be used directly
 
 int main(){
     list<Studentas> studentai;
     int choice;
 
+    // Ask if we want to generate files with random data
     cout << "\nPasirinkite ar norite sugeneruoti failus su atsitiktiniais duomenimis:\n";
     cout << "0 - Sugeneruoti failus\n";
     cout << "1 - Ne\n";
@@ -34,7 +35,7 @@ int main(){
     }
 
     if (choice == 0) {
-        // Generuojami 5 failai
+        // Generating 5 files with random student data
         generuotiDuomenis(1000, "studentai_1000.txt");
         generuotiDuomenis(10000, "studentai_10000.txt");
         generuotiDuomenis(100000, "studentai_100000.txt");
@@ -42,6 +43,7 @@ int main(){
         generuotiDuomenis(10000000, "studentai_10000000.txt");
     }
 
+    // Read student data
     nuskaitymas(studentai);
 
     cout << "\nPasirinkite, ka norite apskaiciuoti:\n";
@@ -50,7 +52,7 @@ int main(){
 
     while(true){
         cout << "Iveskite pasirinkima (1 arba 0): ";
-        if(!(cin >> choice)||(choice != 0 && choice != 1)){
+        if(!(cin >> choice) || (choice != 0 && choice != 1)){
             cout << "Ivestas neteisingas simbolis. Bandykite dar karta.\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -61,12 +63,14 @@ int main(){
         }
     }
 
-    skaiciavimai(studentai, choice); // Apskaičiuojami galutiniai pažymiai
+    // Calculate final grades based on average or median
+    skaiciavimai(studentai, choice);
 
-    // Rūšiuojam studentus į kietiakius ir vargšiukus
+    // Separate students into "rich" and "poor" groups
     list<Studentas> vargsiukai;
     padalintiStudentus(studentai, vargsiukai);
 
+    // Ask how to sort the students
     int sort_choice;
     cout << "\nPasirinkite, pagal ka norite surikiuoti studentus:\n";
     cout << "0 - Rikiuoti pagal pavarde\n";
@@ -75,7 +79,7 @@ int main(){
 
     while (true) {
         cout << "Iveskite pasirinkima (0, 1 arba 2): ";
-        if (!(cin >> sort_choice) || (sort_choice < 0 || sort_choice > 2)) { // Priimam 0, 1 or 2
+        if (!(cin >> sort_choice) || (sort_choice < 0 || sort_choice > 2)) {
             cout << "Ivestas neteisingas simbolis. Bandykite dar karta.\n";
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -85,12 +89,13 @@ int main(){
         }
     }
 
+    // Sort students based on the user's choice
     rikiuotiStudentus(studentai, sort_choice);
     
-    // Išvedimas į failus
+    // Output the results to files
     isvestiIFailus(studentai, vargsiukai, sort_choice);
 
-    // Pasirinkimas 0 spausdinti rezultatus terminale, 1 - baigti programą
+    // Ask whether to print the results or exit the program
     int final_choice;
     cout << "\nPasirinkite:\n";
     cout << "0 - Spausdinti rezultatus i terminala\n";
@@ -108,12 +113,12 @@ int main(){
         }
     }
 
+    // Print the results to the terminal if selected
     if (final_choice == 0) {
-        // Spausdina rezultatus į terminalą
         spausdinti(studentai, choice);
     } else {
         cout << "Programa baigta.\n";
     }
 
-    return 0; // uždarom programą
+    return 0; // End the program
 }
