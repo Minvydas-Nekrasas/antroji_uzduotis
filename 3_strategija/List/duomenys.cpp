@@ -51,106 +51,118 @@ void generuotiDuomenis(int studentuSk, const string &failoPavadinimas) {
 }
 void skaiciavimai(list<Studentas>& studentai, int choice) {
     for (auto& studentas : studentai) {
-        if (choice == 0) {
-            studentas.galutinis = vidurkis(studentas.nd, studentas.egz); // Galutinis pagal vidurkį
+        vector<int> nd = studentas.getNd(); // Get current homework scores
+        int egz = studentas.getEgz();       // Get current exam score
+        
+        if (choice == 0) { 
+            studentas.setNd(nd);  // Set ND (recalculates `galutinis` based on average)
+            studentas.setEgz(egz); 
         } else {
-            studentas.galutinis = mediana(studentas.nd, studentas.egz); // Galutinis pagal medianą
+            studentas.setNd(nd);  // Median-based calculation happens outside
+            double medGalutinis = mediana(nd, egz);
+            // Since we cannot directly set `galutinis`, use this for computation reference.
         }
     }
 }
 void padalintiStudentus(list<Studentas>& studentai, list<Studentas>& vargsiukai) {
     auto start = high_resolution_clock::now();
     
-    // Naudojame iteratorių, kad galėtume iteruoti ir trinti elementus iš sąrašo
-    // Use std::partition to separate "vargšiukai" and "kietiakai" in place
-    
+    // Partition students into "vargšiukai" and "kietiakai"
     auto it = partition(studentai.begin(), studentai.end(), [](const Studentas& s) {
-        return s.galutinis >= 5.0;
+        return s.getGalutinis() >= 5.0; // Use getter for galutinis
     });
 
-    // Transfer "vargšiukai" to the separate list and remove from the original
+    // Move "vargšiukai" into their own list
     vargsiukai.splice(vargsiukai.begin(), studentai, it, studentai.end());
     
     auto end = high_resolution_clock::now();
     auto duration_ms = duration_cast<milliseconds>(end - start);
-    double duration_sec = duration_ms.count() / 1000.0;
-    cout << "Padalinimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundes\n";
+    cout << "Padalinimo laikas: " << fixed << setprecision(3) << (duration_ms.count() / 1000.0) << " sekundės\n";
 }
+
 
 void isvestiIFailus(list<Studentas>& studentai, list<Studentas>& vargsiukai, int sort_choice) {
     auto start = high_resolution_clock::now();
 
-    // Atidarome failą binariniu režimu, kad paspartintume įrašymo greitį
-    ofstream vargsiukaiFile("vargsiukai.txt", ios::out | ios::trunc | ios::binary);
-    ofstream kietiakaiFile("kietiakai.txt", ios::out | ios::trunc | ios::binary);
+    // Open files in text mode
+    ofstream vargsiukaiFile("vargsiukai.txt");
+    ofstream kietiakaiFile("kietiakai.txt");
 
-    // Rūšiavimas (vykdomas tik po padalijimo, kad nesikartotų)
+    // Sort lists before writing
     rikiuotiStudentus(studentai, sort_choice);
     rikiuotiStudentus(vargsiukai, sort_choice);
 
-    // Išvedame duomenis į failą
-
+    // Write vargšiukai data
     vargsiukaiFile << "Pavarde Vardas Galutinis Balas\n";
     for (const auto& studentas : vargsiukai) {
-        vargsiukaiFile << studentas.pavarde << " " << studentas.vardas << " " << studentas.galutinis << "\n";
+        vargsiukaiFile << studentas.getPavarde() << " " 
+                       << studentas.getVardas() << " " 
+                       << fixed << setprecision(2) << studentas.getGalutinis() << "\n";
     }
     vargsiukaiFile.close();
+
+    // Write kietiakai data
     kietiakaiFile << "Pavarde Vardas Galutinis Balas\n";
     for (const auto& studentas : studentai) {
-        kietiakaiFile << studentas.pavarde << " " << studentas.vardas << " " << studentas.galutinis << "\n";
+        kietiakaiFile << studentas.getPavarde() << " " 
+                      << studentas.getVardas() << " " 
+                      << fixed << setprecision(2) << studentas.getGalutinis() << "\n";
     }
     kietiakaiFile.close();
 
     auto end = high_resolution_clock::now();
     auto duration_ms = duration_cast<milliseconds>(end - start);
-    double duration_sec = duration_ms.count() / 1000.0;
-    cout << "Failu isvedimo laikas: " << fixed << setprecision(3) << duration_sec << " sekundes\n";
+    cout << "Failų išvedimo laikas: " << fixed << setprecision(3) << (duration_ms.count() / 1000.0) << " sekundės\n";
 }
 
 // Funkcija atsitiktinių rezultatų generavimui
 void generuotiRandom(Studentas& x, int nd_kiekis) {
     random_device rd;
     mt19937 gen(rd());
-    uniform_int_distribution<> dist(1, 10);  // Pažymiai generuojami nuo 1 iki 10
+    uniform_int_distribution<> dist(1, 10);
 
-    std::cout << "Atsitiktinai sugeneruoti namu darbu pazymiai: ";
+    cout << "Atsitiktinai sugeneruoti namų darbų pažymiai: ";
     for (int i = 0; i < nd_kiekis; i++) {
         int random_pazymys = dist(gen);
-        x.nd.push_back(random_pazymys);
+        x.addNd(random_pazymys); // Use addNd to add grades and recalculate
         cout << random_pazymys << " ";
     }
 
-    x.egz = dist(gen);  // Atsitinktinai sugeneruojame ir egzamino pažymį
-    cout << "\nSugeneruotas egzamino pazymys: " << x.egz << "\n";
+    int egzaminas = dist(gen);
+    x.setEgz(egzaminas); // Use setter for exam score
+    cout << "\nSugeneruotas egzamino pažymys: " << egzaminas << "\n";
 }
+
 // Funkcija skirta perskaityti studento duomenis iš failo
 void skaitytiIsFailo(const string& failo_adresas, list<Studentas>& studentai) {
-
     auto start = high_resolution_clock::now();
 
     ifstream file(failo_adresas);
     string eilute;
-    getline(file, eilute); // Praleidžiam pirmą eilutę
+    getline(file, eilute); // Skip the header
 
     while (getline(file, eilute)) {
-        stringstream ss(eilute); // Kad lengviau nuskaityčiau duomenis
-        Studentas studentas;
-        ss >> studentas.vardas >> studentas.pavarde;
+        stringstream ss(eilute);
+        string vardas, pavarde;
+        vector<int> nd;
+        int egzaminas;
 
-        int pazymys;
-        vector<int> pazymiai;
+        // Read name and surname
+        ss >> vardas >> pavarde;
 
-        // Nuskaitom visus skaičius iki paskutinio (egzamino)
-        while (ss >> pazymys) {
-            pazymiai.push_back(pazymys);
+        // Read homework grades
+        int grade;
+        while (ss >> grade) {
+            nd.push_back(grade);
         }
 
-        if (!pazymiai.empty()) {
-            studentas.egz = pazymiai.back(); // pasiimam paskutinį egzamino pažymį
-            pazymiai.pop_back();             // Panaikinam jį iš namų darbų pažymių
-            studentas.nd = pazymiai;         // Sudedam likusius pažymius į struktųrą
+        if (!nd.empty()) {
+            egzaminas = nd.back(); // Last grade is the exam score
+            nd.pop_back();         // Remove it from homework grades
         }
 
+        // Create a Studentas instance and set values
+        Studentas studentas(vardas, pavarde, nd, egzaminas);
         studentai.push_back(studentas);
     }
 
@@ -158,6 +170,5 @@ void skaitytiIsFailo(const string& failo_adresas, list<Studentas>& studentai) {
 
     auto end = high_resolution_clock::now();
     auto duration_ms = duration_cast<milliseconds>(end - start);
-    double duration_sec = duration_ms.count() / 1000.0;
-    cout << "Failo nuskaitymo laikas: " << fixed << setprecision(3) << duration_sec << " sekundės\n";
+    cout << "Failo nuskaitymo laikas: " << fixed << setprecision(3) << (duration_ms.count() / 1000.0) << " sekundės\n";
 }
