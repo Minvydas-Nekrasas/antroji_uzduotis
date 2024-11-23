@@ -21,6 +21,9 @@ public:
     Studentas();
     Studentas(const string& v, const string& p, const vector<int>& n, int e);
 
+    // Destructor
+    ~Studentas();
+
     // Getters
     string getVardas() const;
     string getPavarde() const;
