@@ -1,45 +1,79 @@
-#ifndef STUDENTAS_H
-#define STUDENTAS_H
+#include "Studentas.h"
+#include <numeric>
 
-#include <string>
-#include <vector>
+// Default constructor
+Studentas::Studentas() : vardas(""), pavarde(""), egz(0), galutinis(0.0) {}
 
-using namespace std;
+// Parameterized constructor
+Studentas::Studentas(const string& v, const string& p, const vector<int>& n, int e)
+    : vardas(v), pavarde(p), nd(n), egz(e) {
+    calculateGalutinis();
+}
 
-class Studentas {
-private:
-    string vardas;              // Student's first name
-    string pavarde;             // Student's last name
-    vector<int> nd;             // Homework grades
-    int egz;                    // Exam grade
-    double galutinis;           // Final grade
+// Getter for vardas
+string Studentas::getVardas() const {
+    return vardas;
+}
 
-    void calculateGalutinis();  // Calculates the final grade (private method)
+// Setter for vardas
+void Studentas::setVardas(const string& v) {
+    vardas = v;
+}
 
-public:
-    // Constructors
-    Studentas();
-    Studentas(const string& v, const string& p, const vector<int>& n, int e);
+// Getter for pavarde
+string Studentas::getPavarde() const {
+    return pavarde;
+}
 
-    // Destructor
-    ~Studentas();
+// Setter for pavarde
+void Studentas::setPavarde(const string& p) {
+    pavarde = p;
+}
 
-    // Getters
-    string getVardas() const;
-    string getPavarde() const;
-    vector<int> getNd() const;
-    int getEgz() const;
-    double& getGalutinis(); // Non-const version
-    const double& getGalutinis() const; // Const version
+// Getter for nd
+vector<int> Studentas::getNd() const {
+    return nd;
+}
 
-    // Setters
-    void setVardas(const string& v);
-    void setPavarde(const string& p);
-    void setNd(const vector<int>& n);
-    void setEgz(int e);
+// Setter for nd
+void Studentas::setNd(const vector<int>& n) {
+    nd = n;
+    calculateGalutinis();
+}
 
-    // Methods
-    void addNd(int grade); // Adds a grade to the homework list and recalculates
-};
+// Getter for egz
+int Studentas::getEgz() const {
+    return egz;
+}
 
-#endif
+// Setter for egz
+void Studentas::setEgz(int e) {
+    egz = e;
+    calculateGalutinis();
+}
+
+// Getter for galutinis (non-const version)
+double& Studentas::getGalutinis() {
+    return galutinis;
+}
+
+// Getter for galutinis (const version)
+const double& Studentas::getGalutinis() const {
+    return galutinis;
+}
+
+// Private method to calculate the final grade
+void Studentas::calculateGalutinis() {
+    if (!nd.empty()) {
+        double nd_avg = accumulate(nd.begin(), nd.end(), 0.0) / nd.size();
+        galutinis = 0.4 * nd_avg + 0.6 * egz;
+    } else {
+        galutinis = 0.6 * egz;
+    }
+}
+
+// Adds a new homework grade and recalculates the final grade
+void Studentas::addNd(int grade) {
+    nd.push_back(grade);
+    calculateGalutinis();
+}
