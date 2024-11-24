@@ -172,16 +172,7 @@ Atlikus pirmą ir antrą strategiją buvo pastebėta, kad pirmoji strategija tik
 | partition vektoriai    | 93.104                        | 7.126              | 537.426                          |
 
 # v1.1
-|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
-|------------------------|----------------------------------|------------------------|-----------------------------------|
-| 1_strategija vektoriai | 93.548                        | 11.149              | 435.121                          |
-| 1_strategija listai    | 93.104                        | 15.039              | 235.011                          |
-| 2_strategija vektoriai | 93.548                        | 21 859 400            | 498.332                          |
-| 2_strategija listai    | 93.104                        | 4.171              | 145.376                          |
-| list su partition      | 93.548                        | 1.162              | 176.744                          |
-| partition vektoriai    | 93.104                        | 7.126              | 537.426                          |
-
-# Spartos analizė:
+## Spartos analizė:
 Eksperimentai parodė, kaip duomenų struktūrų pasirinkimas (struct ar class) ir optimizavimo strategijos (O1, O2, O3) įtakoja našumą atliekant tris pagrindines užduotis: failo nuskaitymą, įrašų rūšiavimą ir įrašų dalijimą į dvi grupes.
 ## 3 strategija su listais `struct` ir `class` palyginimas:
 ### 10 000 000:
