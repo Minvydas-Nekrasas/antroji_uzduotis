@@ -164,22 +164,22 @@ Atlikus pirmą ir antrą strategiją buvo pastebėta, kad pirmoji strategija tik
 ### 10 000 000
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
 |------------------------|----------------------------------|------------------------|-----------------------------------|
-| 1_strategija vektoriai | 270.540                        | 11.149              | 435.121                          |
-| 1_strategija listai    | 270.104                        | 15.039              | 235.011                          |
-| 2_strategija vektoriai | 270.540                        | 21 859 400            | 498.332                          |
-| 2_strategija listai    | 270.104                        | 4.171              | 145.376                          |
-| list su partition      | 270.540                        | 1.162              | 176.744                          |
-| partition vektoriai    | 270.104                        | 7.126              | 537.426                          |
+| 1_strategija vektoriai | 93.548                        | 11.149              | 435.121                          |
+| 1_strategija listai    | 93.104                        | 15.039              | 235.011                          |
+| 2_strategija vektoriai | 93.548                        | 21 859 400            | 498.332                          |
+| 2_strategija listai    | 93.104                        | 4.171              | 145.376                          |
+| list su partition      | 93.548                        | 1.162              | 176.744                          |
+| partition vektoriai    | 93.104                        | 7.126              | 537.426                          |
 
 # v1.1
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
 |------------------------|----------------------------------|------------------------|-----------------------------------|
-| 1_strategija vektoriai | 270.540                        | 11.149              | 435.121                          |
-| 1_strategija listai    | 270.104                        | 15.039              | 235.011                          |
-| 2_strategija vektoriai | 270.540                        | 21 859 400            | 498.332                          |
-| 2_strategija listai    | 270.104                        | 4.171              | 145.376                          |
-| list su partition      | 270.540                        | 1.162              | 176.744                          |
-| partition vektoriai    | 270.104                        | 7.126              | 537.426                          |
+| 1_strategija vektoriai | 93.548                        | 11.149              | 435.121                          |
+| 1_strategija listai    | 93.104                        | 15.039              | 235.011                          |
+| 2_strategija vektoriai | 93.548                        | 21 859 400            | 498.332                          |
+| 2_strategija listai    | 93.104                        | 4.171              | 145.376                          |
+| list su partition      | 93.548                        | 1.162              | 176.744                          |
+| partition vektoriai    | 93.104                        | 7.126              | 537.426                          |
 
 # Spartos analizė:
 XXX
@@ -188,42 +188,42 @@ XXX
 
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
 |------------------------|----------------------------------|------------------------|-----------------------------------|
-| struct  | 270.540 | 1.162 | 176.744 |
-| class | 80.741019 | 12.709376   | 11.763234 |
+| struct  | 93.548 | 1.162 | 176.744 |
+| class | 95.492 | 36.625   | 2.127 |
 
 
 ### 1 000 000:
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
 |------------------------|----------------------------------|------------------------|-----------------------------------|
 | struct    | 9.692  | 0.112 | 14.410 |
-| class  | 9.087334 |  0.927201 | 0.653186 |
+| class  | 27.300 |  3.548 | 0.339 |
 
 
 ###  100 000:
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
 |------------------------|----------------------------------|------------------------|-----------------------------------|
 | struct      | 1.188 | 0.012  | 0.885 |
-| class  | 1.017983 |  0.054632 | 0.058039 |
+| class  | 3.764 |  0.360 | 0.027 |
 
 ### Optimizavimo strategijų (O1, O2, O3) laiko palyginimas:
 ### 10 000 000:
 | Optimization Level | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
 |--------------------|----------------------------------|------------------------|-----------------------------------|
-| O1                | 64.868174                        | 10.089373             | 2.419835                          |
-| O2                | 47.086795                        | 9.124450             | 2.434581                         |
-| O3                | 53.879896                        | 8.736600              | 2.757521                          |
+| O1                | 131.849                        | 22.332             | 1.442                          |
+| O2                | 86.813                        | 22.636             | 1.441                         |
+| O3                | 84.903                        | 20.934              | 1.432                          |
 
 ### 1 000 000:
 | O | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
 |--------------------|----------------------------------|------------------------|-----------------------------------|
-| O1                | 5.372545                        | 0.641815              | 0.197577                         |
-| O2                | 6.024873                        | 0.798799              | 0.187038                         |
-| O3                | 5.134171                        | 0.801610              | 0.196136                         |
+| O1                | 25.501                        | 2.915              | 0.146                         |
+| O2                | 25.721                        | 2.745              | 0.143                         |
+| O3                | 25.432                        | 2.764              | 0.143                         |
 
 ### 100 000 Įrašų Laikų Palyginimas
 | Optimizacijos Lygis | Failo iš įrašų nuskaitymo laikas (s) | Įrašų rūšiavimo laikas (s) | Įrašų dalijimo į dvi grupes laikas (s) |
 |----------------------|--------------------------------------|----------------------------|---------------------------------------|
-| O1 | 0.621154 | 0.025546 | 0.026564 |
-| O2 | 0.737948 | 0.024996 | 0.037737 |
-| O3 | 0.616188 | 0.026672 | 0.029621 |
+| O1 | 3.646 | 0.336 | 0.035 |
+| O2 | 3.619 | 0.343 | 0.016 |
+| O3 | 3.644 | 0.325 | 0.019 |
 
