@@ -182,8 +182,8 @@ Atlikus pirmą ir antrą strategiją buvo pastebėta, kad pirmoji strategija tik
 | partition vektoriai    | 93.104                        | 7.126              | 537.426                          |
 
 # Spartos analizė:
-XXX
-### 3 strategija su listais `struct` ir `class` palyginimas:
+Eksperimentai parodė, kaip duomenų struktūrų pasirinkimas (struct ar class) ir optimizavimo strategijos (O1, O2, O3) įtakoja našumą atliekant tris pagrindines užduotis: failo nuskaitymą, įrašų rūšiavimą ir įrašų dalijimą į dvi grupes.
+## 3 strategija su listais `struct` ir `class` palyginimas:
 ### 10 000 000:
 
 |                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
@@ -205,16 +205,19 @@ XXX
 | struct      | 1.188 | 0.012  | 0.885 |
 | class  | 3.764 |  0.360 | 0.027 |
 
-### Optimizavimo strategijų (O1, O2, O3) laiko palyginimas:
+### Išvada
+Struct yra efektyvesnis duomenų nuskaitymui ir rūšiavimui, tačiau class geriau tinka įrašų dalijimui į grupes.
+
+## Optimizavimo strategijų (O1, O2, O3) laiko palyginimas:
 ### 10 000 000:
-| Optimization Level | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
+| Optimizacijos Lygis | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
 |--------------------|----------------------------------|------------------------|-----------------------------------|
-| O1                | 131.849                        | 22.332             | 1.442                          |
+| O1                | 88.579                        | 22.332             | 1.442                          |
 | O2                | 86.813                        | 22.636             | 1.441                         |
 | O3                | 84.903                        | 20.934              | 1.432                          |
 
 ### 1 000 000:
-| O | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
+| Optimizacijos Lygis | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
 |--------------------|----------------------------------|------------------------|-----------------------------------|
 | O1                | 25.501                        | 2.915              | 0.146                         |
 | O2                | 25.721                        | 2.745              | 0.143                         |
@@ -227,3 +230,5 @@ XXX
 | O2 | 3.619 | 0.343 | 0.016 |
 | O3 | 3.644 | 0.325 | 0.019 |
 
+### Išvada
+O3 optimizacijos lygis yra efektyviausias visais atvejais, nors skirtumai tarp O1, O2, ir O3 mažėja dirbant su mažesniais duomenų rinkiniais.
