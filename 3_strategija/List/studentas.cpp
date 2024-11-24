@@ -10,6 +10,11 @@ Studentas::Studentas(const string& v, const string& p, const vector<int>& n, int
     calculateGalutinis();
 }
 
+// Destructor definition
+Studentas::~Studentas() {
+    // No special cleanup required
+}
+
 // Getter for vardas
 string Studentas::getVardas() const {
     return vardas;
