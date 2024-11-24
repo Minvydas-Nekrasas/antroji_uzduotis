@@ -170,3 +170,60 @@ Atlikus pirmą ir antrą strategiją buvo pastebėta, kad pirmoji strategija tik
 | 2_strategija listai    | 270.104                        | 4.171              | 145.376                          |
 | list su partition      | 270.540                        | 1.162              | 176.744                          |
 | partition vektoriai    | 270.104                        | 7.126              | 537.426                          |
+
+# v1.1
+|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas
+|------------------------|----------------------------------|------------------------|-----------------------------------|
+| 1_strategija vektoriai | 270.540                        | 11.149              | 435.121                          |
+| 1_strategija listai    | 270.104                        | 15.039              | 235.011                          |
+| 2_strategija vektoriai | 270.540                        | 21 859 400            | 498.332                          |
+| 2_strategija listai    | 270.104                        | 4.171              | 145.376                          |
+| list su partition      | 270.540                        | 1.162              | 176.744                          |
+| partition vektoriai    | 270.104                        | 7.126              | 537.426                          |
+
+# Spartos analizė:
+XXX
+### 3 strategija su listais `struct` ir `class` palyginimas:
+### 10 000 000:
+
+|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
+|------------------------|----------------------------------|------------------------|-----------------------------------|
+| struct  | 270.540 | 1.162 | 176.744 |
+| class | 80.741019 | 12.709376   | 11.763234 |
+
+
+### 1 000 000:
+|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
+|------------------------|----------------------------------|------------------------|-----------------------------------|
+| struct    | 9.692  | 0.112 | 14.410 |
+| class  | 9.087334 |  0.927201 | 0.653186 |
+
+
+###  100 000:
+|                        | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
+|------------------------|----------------------------------|------------------------|-----------------------------------|
+| struct      | 1.188 | 0.012  | 0.885 |
+| class  | 1.017983 |  0.054632 | 0.058039 |
+
+### Optimizavimo strategijų (O1, O2, O3) laiko palyginimas:
+### 10 000 000:
+| Optimization Level | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
+|--------------------|----------------------------------|------------------------|-----------------------------------|
+| O1                | 64.868174                        | 10.089373             | 2.419835                          |
+| O2                | 47.086795                        | 9.124450             | 2.434581                         |
+| O3                | 53.879896                        | 8.736600              | 2.757521                          |
+
+### 1 000 000:
+| O | Failo iš įrašų nuskaitymo laikas | Įrašų rūšiavimo laikas | Įrašų dalijimo į dvi grupes laikas |
+|--------------------|----------------------------------|------------------------|-----------------------------------|
+| O1                | 5.372545                        | 0.641815              | 0.197577                         |
+| O2                | 6.024873                        | 0.798799              | 0.187038                         |
+| O3                | 5.134171                        | 0.801610              | 0.196136                         |
+
+### 100 000 Įrašų Laikų Palyginimas
+| Optimizacijos Lygis | Failo iš įrašų nuskaitymo laikas (s) | Įrašų rūšiavimo laikas (s) | Įrašų dalijimo į dvi grupes laikas (s) |
+|----------------------|--------------------------------------|----------------------------|---------------------------------------|
+| O1 | 0.621154 | 0.025546 | 0.026564 |
+| O2 | 0.737948 | 0.024996 | 0.037737 |
+| O3 | 0.616188 | 0.026672 | 0.029621 |
+
