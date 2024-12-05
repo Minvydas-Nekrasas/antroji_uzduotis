@@ -1,5 +1,6 @@
 #include "Studentas.h"
 #include <numeric>
+#include <algorithm> // for std::copy
 
 // Default constructor
 Studentas::Studentas() : vardas(""), pavarde(""), egz(0), galutinis(0.0) {}
@@ -9,6 +10,11 @@ Studentas::Studentas(const string& v, const string& p, const vector<int>& n, int
     : vardas(v), pavarde(p), nd(n), egz(e) {
     calculateGalutinis();
 }
+
+// Copy constructor (deep copy)
+Studentas::Studentas(const Studentas& other)
+    : vardas(other.vardas), pavarde(other.pavarde), nd(other.nd), egz(other.egz), galutinis(other.galutinis) {}
+
 
 // Destructor definition
 Studentas::~Studentas() {
