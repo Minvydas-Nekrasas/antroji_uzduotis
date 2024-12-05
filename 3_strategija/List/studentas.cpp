@@ -15,6 +15,17 @@ Studentas::Studentas(const string& v, const string& p, const vector<int>& n, int
 Studentas::Studentas(const Studentas& other)
     : vardas(other.vardas), pavarde(other.pavarde), nd(other.nd), egz(other.egz), galutinis(other.galutinis) {}
 
+// Copy assignment operator (deep copy)
+Studentas& Studentas::operator=(const Studentas& other) {
+    if (this != &other) { // Avoid self-assignment
+        vardas = other.vardas;
+        pavarde = other.pavarde;
+        nd = other.nd; // Vector's assignment operator handles deep copying
+        egz = other.egz;
+        galutinis = other.galutinis;
+    }
+    return *this;
+}
 
 // Destructor definition
 Studentas::~Studentas() {
