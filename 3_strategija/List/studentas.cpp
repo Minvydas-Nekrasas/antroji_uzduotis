@@ -12,7 +12,7 @@ Studentas::Studentas(const string& v, const string& p, const vector<int>& n, int
 
 // Destructor definition
 Studentas::~Studentas() {
-    // No special cleanup required
+    nd.clear();
 }
 
 // Getter for vardas
