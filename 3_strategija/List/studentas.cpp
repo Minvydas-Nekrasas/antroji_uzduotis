@@ -1,11 +1,13 @@
 #include "Studentas.h"
+#include <iostream>
+#include <iomanip>
 #include <numeric>
 #include <algorithm> // for std::copy
 
-// Default constructor
+// Paprastas konstruktorius
 Studentas::Studentas() : vardas(""), pavarde(""), egz(0), galutinis(0.0) {}
 
-// Parameterized constructor
+// Parametrizuotas konstruktorius
 Studentas::Studentas(const string& v, const string& p, const vector<int>& n, int e)
     : vardas(v), pavarde(p), nd(n), egz(e) {
     calculateGalutinis();
@@ -20,71 +22,98 @@ Studentas& Studentas::operator=(const Studentas& other) {
     if (this != &other) { // Avoid self-assignment
         vardas = other.vardas;
         pavarde = other.pavarde;
-        nd = other.nd; // Vector's assignment operator handles deep copying
+        nd = other.nd; // Vektorius
         egz = other.egz;
         galutinis = other.galutinis;
     }
     return *this;
 }
 
-// Destructor definition
+// Destruktorius
 Studentas::~Studentas() {
-    // No special cleanup required
+    nd.clear();
 }
 
-// Getter for vardas
+// Įvesties operatorius
+istream& operator>>(istream& in, Studentas& s) {
+    cout << "Įveskite vardą: ";
+    in >> s.vardas;
+
+    cout << "Įveskite pavardę: ";
+    in >> s.pavarde;
+
+    cout << "Įveskite namų darbų pažymius (įveskite -1 pabaigti): ";
+    s.nd.clear();
+    int grade;
+    while (in >> grade && grade != -1) {
+        s.nd.push_back(grade);
+    }
+    in.clear();
+
+    cout << "Įveskite egzamino pažymį: ";
+    in >> s.egz;
+
+    s.calculateGalutinis();
+
+    return in;
+}
+
+// Išvesties operatorius
+ostream& operator<<(ostream& out, const Studentas& s) {
+    out << setw(15) << left << s.vardas
+        << setw(15) << left << s.pavarde
+        << setw(10) << left << fixed << setprecision(2) << s.galutinis;
+    return out;
+}
+
+
 string Studentas::getVardas() const {
     return vardas;
 }
 
-// Setter for vardas
 void Studentas::setVardas(const string& v) {
     vardas = v;
 }
 
-// Getter for pavarde
+
 string Studentas::getPavarde() const {
     return pavarde;
 }
 
-// Setter for pavarde
 void Studentas::setPavarde(const string& p) {
     pavarde = p;
 }
 
-// Getter for nd
+
 vector<int> Studentas::getNd() const {
     return nd;
 }
 
-// Setter for nd
 void Studentas::setNd(const vector<int>& n) {
     nd = n;
     calculateGalutinis();
 }
 
-// Getter for egz
+
 int Studentas::getEgz() const {
     return egz;
 }
 
-// Setter for egz
 void Studentas::setEgz(int e) {
     egz = e;
     calculateGalutinis();
 }
 
-// Getter for galutinis (non-const version)
+
 double& Studentas::getGalutinis() {
     return galutinis;
 }
 
-// Getter for galutinis (const version)
 const double& Studentas::getGalutinis() const {
     return galutinis;
 }
 
-// Private method to calculate the final grade
+// Privatus metodas galutinio pažymio skaičiavimui
 void Studentas::calculateGalutinis() {
     if (!nd.empty()) {
         double nd_avg = accumulate(nd.begin(), nd.end(), 0.0) / nd.size();
