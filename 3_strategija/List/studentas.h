@@ -21,6 +21,8 @@ public:
     Studentas();
     Studentas(const string& v, const string& p, const vector<int>& n, int e);
 
+    Studentas(const Studentas& other);
+    Studentas& operator=(const Studentas& other);
     // Destructor
     ~Studentas();
 
