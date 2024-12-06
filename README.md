@@ -221,5 +221,12 @@ Struct yra efektyvesnis duomenų nuskaitymui ir rūšiavimui, tačiau class geri
 | O2 | 3.619 | 0.343 | 0.016 |
 | O3 | 3.644 | 0.325 | 0.019 |
 
+### .exe failų dydžių palyginimas
+| Optimizacijos Lygis | .exe failo dydis (baitais) |
+|----------------------|--------------------------------------|
+| O1 | 231,588 |
+| O2 | 205,398 |
+| O3 | 231,547 |
+
 ### Išvada
 O3 optimizacijos lygis yra efektyviausias visais atvejais, nors skirtumai tarp O1, O2, ir O3 mažėja dirbant su mažesniais duomenų rinkiniais.
