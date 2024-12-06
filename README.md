@@ -235,13 +235,15 @@ Rule of three:
  ``` cpp
 	~Stud() { }
 ```
+Užtikrina, kad nebūtų nutekėjimų atmintyje, kai sunaikinami objektai.
 - ## Parašytas **kopijavimo konstruktorius**:
+- Kopijavimo konstruktorius Leidžia inicijuoti naują objektą, kopijuojant duomenis iš esamo objekto.
   ``` cpp
   Studentas::Studentas(const Studentas& other)
     : vardas(other.vardas), pavarde(other.pavarde), nd(other.nd), egz(other.egz), galutinis(other.galutinis) {}
   ```
 - ## Parašytas **kopijavimo operatorius**:
-   Šis operatorius suveikia tada, kai jau egzistuojantis objektas įgyja kito objekto reikšmes.
+   Kopijavimo operatorius Užtikrina, kad jau egzistuojančio objekto duomenys būtų perrašomi iš kito objekto, vengiant savęs priskyrimo.
   ``` cpp
   Studentas& Studentas::operator=(const Studentas& other) {
     if (this != &other) { // Avoid self-assignment
@@ -437,12 +439,13 @@ Rule of three:
   ```
 - ## Parašytas **Rule of three naudojimo pavyzdys**:
   ``` cpp
-    Studentas a;
-    cin >> a;
-    Studentas b = a;
-    cin >> b;
+	Studentas a;
+	cin >> a; // Įvedamas pirmas studentas
+	Studentas b = a; // Naudojamas kopijavimo konstruktorius
+	cin >> b; // Keičiamas antro studento turinys
 
-    cout << "\nRezultatai:\n";
-    cout << "Studentas 1: " << a << endl;
-    cout << "Studentas 2: " << b << endl;
+	cout << "Rezultatai:\n";
+	cout << "Studentas 1: " << a << endl;
+	cout << "Studentas 2: " << b << endl;
+
   ```
