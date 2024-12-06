@@ -28,7 +28,6 @@ int main(){
     list<Studentas> studentai;
     int choice;
 
-    // Ask if we want to generate files with random data
     cout << "\nPasirinkite ar norite sugeneruoti failus su atsitiktiniais duomenimis:\n";
     cout << "0 - Sugeneruoti failus\n";
     cout << "1 - Ne\n";
@@ -45,7 +44,7 @@ int main(){
     }
 
     if (choice == 0) {
-        // Generating 5 files with random student data
+        
         generuotiDuomenis(1000, "studentai_1000.txt");
         generuotiDuomenis(10000, "studentai_10000.txt");
         generuotiDuomenis(100000, "studentai_100000.txt");
@@ -53,7 +52,6 @@ int main(){
         generuotiDuomenis(10000000, "studentai_10000000.txt");
     }
 
-    // Read student data
     nuskaitymas(studentai);
 
     cout << "\nPasirinkite, ka norite apskaiciuoti:\n";
@@ -73,14 +71,11 @@ int main(){
         }
     }
 
-    // Calculate final grades based on average or median
     skaiciavimai(studentai, choice);
 
-    // Separate students into "rich" and "poor" groups
     list<Studentas> vargsiukai;
     padalintiStudentus(studentai, vargsiukai);
 
-    // Ask how to sort the students
     int sort_choice;
     cout << "\nPasirinkite, pagal ka norite surikiuoti studentus:\n";
     cout << "0 - Rikiuoti pagal pavarde\n";
@@ -99,13 +94,10 @@ int main(){
         }
     }
 
-    // Sort students based on the user's choice
     rikiuotiStudentus(studentai, sort_choice);
     
-    // Output the results to files
     isvestiIFailus(studentai, vargsiukai, sort_choice);
 
-    // Ask whether to print the results or exit the program
     int final_choice;
     cout << "\nPasirinkite:\n";
     cout << "0 - Spausdinti rezultatus i terminala\n";
@@ -123,12 +115,11 @@ int main(){
         }
     }
 
-    // Print the results to the terminal if selected
     if (final_choice == 0) {
         spausdinti(studentai, choice);
     } else {
         cout << "Programa baigta.\n";
     }
 
-    return 0; // End the program
+    return 0;
 }
