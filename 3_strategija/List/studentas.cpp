@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <numeric>
+#include "ivedimas.h"
 #include <algorithm> // for std::copy
 
 // Paprastas konstruktorius
@@ -36,27 +37,102 @@ Studentas::~Studentas() {
 
 // Įvesties operatorius
 istream& operator>>(istream& in, Studentas& s) {
-    cout << "Įveskite vardą: ";
-    in >> s.vardas;
+    string input;
 
-    cout << "Įveskite pavardę: ";
-    in >> s.pavarde;
-
-    cout << "Įveskite namų darbų pažymius (įveskite -1 pabaigti): ";
-    s.nd.clear();
-    int grade;
-    while (in >> grade && grade != -1) {
-        s.nd.push_back(grade);
+    // Input for first name
+    cout << "Irasykite studento varda (ne daugiau nei 10 simboliu) arba paspauskite ENTER, kad baigtumete: ";
+    getline(in, input);
+    if (input.empty()) return in; // If user presses ENTER, stop input
+    if (!arTeisinga(input)) {
+        cout << "Netinkamas vardas. Bandykite dar karta.\n";
+        return in;
     }
-    in.clear();
+    s.setVardas(input);
 
-    cout << "Įveskite egzamino pažymį: ";
-    in >> s.egz;
+    // Input for last name
+    cout << "Irasykite studento pavarde (ne daugiau nei 10 simboliu): ";
+    getline(in, input);
+    if (input.empty()) return in; // If user presses ENTER, stop input
+    if (!arTeisinga(input)) {
+        cout << "Netinkama pavarde. Bandykite dar karta.\n";
+        return in;
+    }
+    s.setPavarde(input);
 
-    s.calculateGalutinis();
+    // Ask if random grades should be generated
+    int choice;
+    cout << "Ar norite atsitiktinai sugeneruoti namu darbu ir egzamino pazymius?\n";
+    cout << "0 - Ne, ivesiu ranka\n";
+    cout << "1 - Taip, sugeneruok atsitiktinai\n";     
+    while (true) {
+        cout << "Iveskite pasirinkima (1 arba 0): ";
+        if (!(in >> choice) || (choice != 0 && choice != 1)) {
+            cout << "Neteisingas pasirinkimas. Bandykite dar karta.\n";
+            in.clear(); // Clear error state
+            in.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear invalid input
+        } else {
+            in.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear newline after input
+            break;
+        }
+    }
+    
+    if (choice == 1) {
+        // Generate random grades for homework and exam
+        int nd_kiekis;
+        cout << "Kiek norite sugeneruoti namu darbu pazymiu? (Ne daugiau nei 10 000): ";
+        while (!(in >> nd_kiekis) || nd_kiekis < 0 || nd_kiekis > 10000) {
+            cout << "Iveskite teisinga skaiciu: ";
+            in.clear();
+            in.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear invalid input
+        }
+
+        generuotiRandom(s, nd_kiekis);  // Generate random grades for the student
+
+        in.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
+    } else {
+        // Manually enter homework grades
+        cout << "Irasykite namu darbu pazymius (nuo 0 iki 10). Noredami baigti ivesti pazymius, paspauskite ENTER:\n";
+        int pazymys;
+        while (true) {
+            cout << "Irasykite pazymi: ";
+            getline(in, input);
+            if (input.empty()) break;
+
+            try {
+                pazymys = stoi(input);
+                if (pazymys < 0 || pazymys > 10) {
+                    throw out_of_range("Pazymys turi buti tarp 0 ir 10.");
+                }
+                s.addNd(pazymys);  // Add grade using the setter method
+            } catch (invalid_argument&) {
+                cout << "Iveskite teisinga pazymi (skaiciu nuo 0 iki 10).\n";
+            } catch (out_of_range& e) {
+                cout << e.what() << endl;
+            }
+        }
+
+        // Get the exam grade
+        cout << "Irasykite egzamino pazymi: ";
+        while (true) {
+            getline(in, input);
+            try {
+                pazymys = stoi(input);
+                if (pazymys < 0 || pazymys > 10) {
+                    throw out_of_range("Egzamino pazymys turi buti tarp 0 ir 10.");
+                }
+                s.setEgz(pazymys);  // Set exam grade using setter
+                break;
+            } catch (invalid_argument&) {
+                cout << "Iveskite teisinga egzamino pazymi (skaiciu nuo 0 iki 10).\n";
+            } catch (out_of_range& e) {
+                cout << e.what() << endl;
+            }
+        }
+    }
 
     return in;
 }
+
 
 // Išvesties operatorius
 ostream& operator<<(ostream& out, const Studentas& s) {

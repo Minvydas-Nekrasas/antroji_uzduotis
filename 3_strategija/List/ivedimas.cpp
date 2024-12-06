@@ -40,101 +40,21 @@ void nuskaitymas(list<Studentas>& studentai) {
         while (true) {
             Studentas x;
 
-            // Get student's first name
-            cout << "\nIrasykite studento varda (ne daugiau nei 10 simboliu) arba paspauskite ENTER, kad baigtumete: ";
+            // Use operator>> to input student data
+            cout << "\nIveskite studento duomenis:\n";
+            cin >> x;  // Use the operator>> to collect all input for the student
+
+            if (cin.eof()) break;  // If user presses ENTER twice, stop input
+
+            // Add student to the list after collecting data
+            studentai.push_back(x);
+
+            // Ask if the user wants to add another student
+            cout << "Ar norite prideti kita studenta? (y/n): ";
             getline(cin, input);
-            if (input.empty()) break; // Stop if ENTER pressed twice
-
-            if (!arTeisinga(input)) {
-                cout << "Netinkamas vardas. Bandykite dar karta.\n";
-                continue;
+            if (input == "n" || input == "N") {
+                break;
             }
-            x.setVardas(input);  // Set student's first name using setter
-
-            // Get student's last name
-            cout << "Irasykite studento pavarde (ne daugiau nei 10 simboliu): ";
-            getline(cin, input);
-            if (input.empty()) break; // Stop if ENTER pressed twice
-
-            if (!arTeisinga(input)) {
-                cout << "Netinkama pavarde. Bandykite dar karta.\n";
-                continue;
-            }
-            x.setPavarde(input);  // Set student's last name using setter
-
-            // Ask if random grades should be generated
-            int choice;
-            cout << "Ar norite atsitiktinai sugeneruoti namu darbu ir egzamino pazymius?\n";
-            cout << "0 - Ne, ivesiu ranka\n";
-            cout << "1 - Taip, sugeneruok atsitiktinai\n";     
-            
-            while (true) {
-                cout << "Iveskite pasirinkima (1 arba 0): ";
-                if (!(cin >> choice) || (choice != 0 && choice != 1)) {
-                    cout << "Neteisingas pasirinkimas. Bandykite dar karta.\n";
-                    cin.clear(); // Clear error state
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear invalid input
-                } else {
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear newline after input
-                    break;
-                }
-            }
-            
-            if (choice == 1) {
-                // Generate random grades for homework and exam
-                int nd_kiekis;
-                cout << "Kiek norite sugeneruoti namu darbu pazymiu? (Ne daugiau nei 10 000): ";
-                while (!(cin >> nd_kiekis) || nd_kiekis < 0 || nd_kiekis > 10000) {
-                    cout << "Iveskite teisinga skaiciu: ";
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear invalid input
-                }
-
-                generuotiRandom(x, nd_kiekis);  // Generate random grades for the student
-
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the buffer
-            } else {
-                // Manually enter homework grades
-                cout << "Irasykite namu darbu pazymius (nuo 0 iki 10). Noredami baigti ivesti pazymius, paspauskite ENTER:\n";
-                
-                while (true) {
-                    cout << "Irasykite pazymi: ";
-                    getline(cin, input);
-                    if (input.empty()) break;
-
-                    try {
-                        pazymys = stoi(input);
-                        if (pazymys < 0 || pazymys > 10) {
-                            throw out_of_range("Pazymys turi buti tarp 0 ir 10.");
-                        }
-                        x.addNd(pazymys);  // Add grade using the setter method
-                    } catch (invalid_argument&) {
-                        cout << "Iveskite teisinga pazymi (skaiciu nuo 0 iki 10).\n";
-                    } catch (out_of_range& e) {
-                        cout << e.what() << endl;
-                    }
-                }
-
-                // Get the exam grade
-                cout << "Irasykite egzamino pazymi: ";
-                while (true) {
-                    getline(cin, input);
-                    try {
-                        pazymys = stoi(input);
-                        if (pazymys < 0 || pazymys > 10) {
-                            throw out_of_range("Egzamino pazymys turi buti tarp 0 ir 10.");
-                        }
-                        x.setEgz(pazymys);  // Set exam grade using setter
-                        break;
-                    } catch (invalid_argument&) {
-                        cout << "Iveskite teisinga egzamino pazymi (skaiciu nuo 0 iki 10).\n";
-                    } catch (out_of_range& e) {
-                        cout << e.what() << endl;
-                    }
-                }
-            }
-
-            studentai.push_back(x);  // Add student to the list
         }
     }
 }

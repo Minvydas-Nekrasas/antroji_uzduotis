@@ -19,13 +19,9 @@ void spausdinti(const list<Studentas>& studentai, bool choice) {
 
     buffer << "\n-----------------------------------------------------------------------------------------------------------------------------------------\n";
     buffer << left << setw(10) << "Pavardė"
-           << setw(10) << "" << "Adresas"
            << setw(10) << "" << "Vardas"
-           << setw(10) << "" << "Adresas" 
            << setw(10) << "" << "Galutinis "
-           << pasirinkimas_pav
-           << setw(10) << "" << "Adresas"
-           << setw(10) << "" << "Listo adresas" << endl;
+           << pasirinkimas_pav << endl;
     buffer << "-----------------------------------------------------------------------------------------------------------------------------------------\n";
 
     for (const auto& studentas : studentai) {

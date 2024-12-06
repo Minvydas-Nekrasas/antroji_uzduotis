@@ -15,6 +15,16 @@
 using namespace std; // so that std::string can be used directly
 
 int main(){
+
+    Studentas a;
+    cin >> a;
+    Studentas b = a;
+    cin >> b;
+
+    cout << "\nRezultatai:\n";
+    cout << "Studentas 1: " << a << endl;
+    cout << "Studentas 2: " << b << endl;
+
     list<Studentas> studentai;
     int choice;
 
