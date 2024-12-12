@@ -1,15 +1,13 @@
 #ifndef STUDENTAS_H
 #define STUDENTAS_H
 
-#include <string>
+#include "zmogus.h"
 #include <vector>
+#include <numeric>
+#include <algorithm>
 
-using namespace std;
-
-class Studentas {
+class Studentas : public Zmogus {
 private:
-    string vardas;
-    string pavarde;
     vector<int> nd;
     int egz;
     double galutinis;
@@ -23,28 +21,27 @@ public:
 
     Studentas(const Studentas& other);
     Studentas& operator=(const Studentas& other);
-    // Destruktorius
+
     ~Studentas();
 
-    friend istream& operator>>(istream& in, Studentas& s);
-    friend ostream& operator<<(ostream& out, const Studentas& s);
-
     // Getteriai
-    string getVardas() const;
-    string getPavarde() const;
     vector<int> getNd() const;
     int getEgz() const;
     double& getGalutinis();
     const double& getGalutinis() const;
 
     // Setteriai
-    void setVardas(const string& v);
-    void setPavarde(const string& p);
     void setNd(const vector<int>& n);
     void setEgz(int e);
 
     // Metodai
     void addNd(int grade);
+
+    // Overridden pure virtual method
+    void printInfo(ostream& out) const override;
+
+    // Draugai operatoriai
+    friend istream& operator>>(istream& in, Studentas& s);
 };
 
 #endif
