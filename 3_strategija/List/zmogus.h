@@ -19,7 +19,7 @@ public:
 
     virtual ~Zmogus() {}
 
-    virtual void print(ostream& out, bool choice) const = 0; // Pure virtual method
+    virtual string toString() const = 0;   
 
     // Getteriai
     virtual string getVardas() const;

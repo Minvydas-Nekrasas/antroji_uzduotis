@@ -184,14 +184,8 @@ void Studentas::addNd(int grade) {
     nd.push_back(grade);
     calculateGalutinis();
 }
-void Studentas::print(ostream& out, bool choice) const {
-    string pasirinkimas_pav = (choice == 0) ? "(Vid.)" : "(Med.)";
-
-    stringstream buffer;
-
-    buffer << left << setw(10) << pavarde
-           << setw(10) << "" << vardas
-           << setw(15) << "" << fixed << setprecision(2) << galutinis << " " << pasirinkimas_pav << endl;
-
-    out << buffer.str(); // Output the result
+string Studentas::toString() const {
+    stringstream ss;
+    ss << "Vardas: " << vardas << ", Pavarde: " << pavarde << ", Galutinis: " << fixed << setprecision(2) << galutinis;
+    return ss.str();
 }

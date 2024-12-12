@@ -11,6 +11,7 @@
 #include <random>
 #include <chrono>
 #include <list>
+#include "Zmogus.h"
 
 using namespace std; // so that std::string can be used directly
 
@@ -24,6 +25,7 @@ int main(){
     cout << "\nRezultatai:\n";
     cout << "Studentas 1: " << a << endl;
     cout << "Studentas 2: " << b << endl;
+    cout << a.toString() << endl;
 
     list<Studentas> studentai;
     int choice;
@@ -115,13 +117,11 @@ int main(){
         }
     }
 
-if (final_choice == 0) {
-    for (const auto& studentas : studentai) {
-        studentas.print(cout, choice); // Call the print method for each student
+    if (final_choice == 0) {
+        spausdinti(studentai, choice);
+    } else {
+        cout << "Programa baigta.\n";
     }
-} else {
-    cout << "Programa baigta.\n";
-}
 
     return 0;
 }
