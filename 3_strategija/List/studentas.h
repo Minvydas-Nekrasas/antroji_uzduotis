@@ -1,7 +1,7 @@
 #ifndef STUDENTAS_H
 #define STUDENTAS_H
 
-#include "zmogus.h"
+#include "Zmogus.h"
 #include <vector>
 #include <numeric>
 #include <algorithm>
@@ -24,6 +24,9 @@ public:
 
     ~Studentas();
 
+    friend istream& operator>>(istream& in, Studentas& s);
+    friend ostream& operator<<(ostream& out, const Studentas& s);
+
     // Getteriai
     vector<int> getNd() const;
     int getEgz() const;
@@ -36,12 +39,6 @@ public:
 
     // Metodai
     void addNd(int grade);
-
-    // Overridden pure virtual method
-    void printInfo(ostream& out) const override;
-
-    // Draugai operatoriai
-    friend istream& operator>>(istream& in, Studentas& s);
 };
 
 #endif

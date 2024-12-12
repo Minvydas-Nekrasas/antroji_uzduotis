@@ -17,7 +17,7 @@ public:
     Zmogus() : vardas(""), pavarde("") {}
     Zmogus(const string& v, const string& p) : vardas(v), pavarde(p) {}
 
-    virtual ~Zmogus() {} // Virtual destructor
+    virtual ~Zmogus() {}
 
     // Getteriai
     string getVardas() const { return vardas; }
@@ -26,15 +26,6 @@ public:
     // Setteriai
     void setVardas(const string& v) { vardas = v; }
     void setPavarde(const string& p) { pavarde = p; }
-
-    // Pure virtual function (abstrakti funkcija)
-    virtual void printInfo(ostream& out) const = 0;
-
-    // Draugai operatoriai
-    friend ostream& operator<<(ostream& out, const Zmogus& z) {
-        z.printInfo(out);
-        return out;
-    }
 };
 
 #endif

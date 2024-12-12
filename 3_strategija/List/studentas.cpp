@@ -5,18 +5,19 @@
 #include "ivedimas.h"
 #include <algorithm> // for std::copy
 
-// Paprastas konstruktorius
-Studentas::Studentas() : vardas(""), pavarde(""), egz(0), galutinis(0.0) {}
+#include "Studentas.h"
+#include <iostream>
+#include <limits>
 
-// Parametrizuotas konstruktorius
+Studentas::Studentas() : Zmogus(), egz(0), galutinis(0.0) {}
+
 Studentas::Studentas(const string& v, const string& p, const vector<int>& n, int e)
-    : vardas(v), pavarde(p), nd(n), egz(e) {
+    : Zmogus(v, p), nd(n), egz(e) {
     calculateGalutinis();
 }
 
-// Copy constructor (deep copy)
 Studentas::Studentas(const Studentas& other)
-    : vardas(other.vardas), pavarde(other.pavarde), nd(other.nd), egz(other.egz), galutinis(other.galutinis) {}
+    : Zmogus(other.vardas, other.pavarde), nd(other.nd), egz(other.egz), galutinis(other.galutinis) {}
 
 // Copy assignment operator (deep copy)
 Studentas& Studentas::operator=(const Studentas& other) {
@@ -140,24 +141,6 @@ ostream& operator<<(ostream& out, const Studentas& s) {
         << setw(15) << left << s.pavarde
         << setw(10) << left << fixed << setprecision(2) << s.galutinis;
     return out;
-}
-
-
-string Studentas::getVardas() const {
-    return vardas;
-}
-
-void Studentas::setVardas(const string& v) {
-    vardas = v;
-}
-
-
-string Studentas::getPavarde() const {
-    return pavarde;
-}
-
-void Studentas::setPavarde(const string& p) {
-    pavarde = p;
 }
 
 
