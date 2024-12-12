@@ -4,9 +4,6 @@
 #include <numeric>
 #include "ivedimas.h"
 #include <algorithm> // for std::copy
-
-#include "Studentas.h"
-#include <iostream>
 #include <limits>
 
 Studentas::Studentas() : Zmogus(), egz(0), galutinis(0.0) {}
@@ -186,4 +183,15 @@ void Studentas::calculateGalutinis() {
 void Studentas::addNd(int grade) {
     nd.push_back(grade);
     calculateGalutinis();
+}
+void Studentas::print(ostream& out, bool choice) const {
+    string pasirinkimas_pav = (choice == 0) ? "(Vid.)" : "(Med.)";
+
+    stringstream buffer;
+
+    buffer << left << setw(10) << pavarde
+           << setw(10) << "" << vardas
+           << setw(15) << "" << fixed << setprecision(2) << galutinis << " " << pasirinkimas_pav << endl;
+
+    out << buffer.str(); // Output the result
 }

@@ -115,11 +115,13 @@ int main(){
         }
     }
 
-    if (final_choice == 0) {
-        spausdinti(studentai, choice);
-    } else {
-        cout << "Programa baigta.\n";
+if (final_choice == 0) {
+    for (const auto& studentas : studentai) {
+        studentas.print(cout, choice); // Call the print method for each student
     }
+} else {
+    cout << "Programa baigta.\n";
+}
 
     return 0;
 }

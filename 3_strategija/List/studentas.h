@@ -27,6 +27,8 @@ public:
     friend istream& operator>>(istream& in, Studentas& s);
     friend ostream& operator<<(ostream& out, const Studentas& s);
 
+    void print(ostream& out, bool choice) const override;
+
     // Getteriai
     vector<int> getNd() const;
     int getEgz() const;

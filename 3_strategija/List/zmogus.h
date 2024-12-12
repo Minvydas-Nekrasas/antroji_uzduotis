@@ -19,13 +19,15 @@ public:
 
     virtual ~Zmogus() {}
 
+    virtual void print(ostream& out, bool choice) const = 0; // Pure virtual method
+
     // Getteriai
-    string getVardas() const { return vardas; }
-    string getPavarde() const { return pavarde; }
+    virtual string getVardas() const;
+    virtual string getPavarde() const;
 
     // Setteriai
-    void setVardas(const string& v) { vardas = v; }
-    void setPavarde(const string& p) { pavarde = p; }
+    virtual void setVardas(const string& v);
+    virtual void setPavarde(const string& p);
 };
 
 #endif
