@@ -449,3 +449,78 @@ Užtikrina, kad nebūtų nutekėjimų atmintyje, kai sunaikinami objektai.
 	cout << "Studentas 2: " << b << endl;
 
   ```
+# v1.5
+## Sukurta bazinė klasė žmogus. zmogus.h:
+  ``` cpp
+#ifndef ZMOGUS_H
+#define ZMOGUS_H
+
+#include <string>
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+class Zmogus {
+protected:
+    string vardas;
+    string pavarde;
+
+public:
+    // Konstruktoriai
+    Zmogus() : vardas(""), pavarde("") {}
+    Zmogus(const string& v, const string& p) : vardas(v), pavarde(p) {}
+
+    virtual ~Zmogus() {}
+
+    virtual string toString() const = 0;   
+
+    // Getteriai
+    virtual string getVardas() const;
+    virtual string getPavarde() const;
+
+    // Setteriai
+    virtual void setVardas(const string& v);
+    virtual void setPavarde(const string& p);
+};
+
+#endif
+
+
+  ```
+Klasėje žmogus sukurtas virtualus metodas toString(), todėl klasė yra abstrakti.
+## zmogus.cpp:
+  ``` cpp
+#include "zmogus.h"
+
+string Zmogus::getVardas() const {
+    return vardas;
+}
+
+void Zmogus::setVardas(const string& v) {
+    vardas = v;
+}
+
+
+string Zmogus::getPavarde() const {
+    return pavarde;
+}
+
+void Zmogus::setPavarde(const string& p) {
+    pavarde = p;
+}
+
+  ```
+Klasė studentas paverčiama į išvestinę. studentas.cpp faile yra aprašomas toString() metodas.
+## studentas.cpp iškarpa:
+  ``` cpp
+string Studentas::toString() const {
+    stringstream ss;
+    ss << "Vardas: " << vardas << ", Pavarde: " << pavarde << ", Galutinis: " << fixed << setprecision(2) << galutinis;
+    return ss.str();
+}
+  ```
+main.cpp faile iškviečiamas toString() metodas:
+  ``` cpp
+    cout << a.toString() << endl;
+  ```
