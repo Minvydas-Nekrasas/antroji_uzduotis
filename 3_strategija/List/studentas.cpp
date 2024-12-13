@@ -108,8 +108,7 @@ istream& operator>>(istream& in, Studentas& s) {
                 cout << e.what() << endl;
             }
         }
-
-        // Get the exam grade
+        
         cout << "Irasykite egzamino pazymi: ";
         while (true) {
             getline(in, input);
@@ -118,7 +117,7 @@ istream& operator>>(istream& in, Studentas& s) {
                 if (pazymys < 0 || pazymys > 10) {
                     throw out_of_range("Egzamino pazymys turi buti tarp 0 ir 10.");
                 }
-                s.setEgz(pazymys);  // Set exam grade using setter
+                s.setEgz(pazymys);
                 break;
             } catch (invalid_argument&) {
                 cout << "Iveskite teisinga egzamino pazymi (skaiciu nuo 0 iki 10).\n";
@@ -179,7 +178,6 @@ void Studentas::calculateGalutinis() {
     }
 }
 
-// Adds a new homework grade and recalculates the final grade
 void Studentas::addNd(int grade) {
     nd.push_back(grade);
     calculateGalutinis();

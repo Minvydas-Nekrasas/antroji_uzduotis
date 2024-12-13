@@ -16,7 +16,7 @@
 using namespace std; // so that std::string can be used directly
 
 int main(){
-
+    // Zmogus zmogus = ("Jonas", "Jonaitis");
     Studentas a;
     cin >> a;
     Studentas b = a;
