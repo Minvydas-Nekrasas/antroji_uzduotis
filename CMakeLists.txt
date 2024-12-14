@@ -17,4 +17,6 @@ add_executable(vertinimas
     vertinimas.cpp
     vertinimas.h
     ivedimas.cpp
-    ivedimas.h)
+    ivedimas.h
+    zmogus.h
+    zmogus.cpp)
