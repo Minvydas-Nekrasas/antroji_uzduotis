@@ -3,8 +3,7 @@ project(vertinimas)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(.)
-
+# Define the main project executable
 add_executable(vertinimas
     studentas.h
     studentas.cpp
@@ -20,4 +19,6 @@ add_executable(vertinimas
     ivedimas.cpp
     ivedimas.h
     zmogus.h
-    zmogus.cpp)
+    zmogus.cpp
+)
+
