@@ -1,3 +1,4 @@
+#ifndef TESTING
 #include <iostream>
 #include <iomanip>
 #include <limits> // numeric_limits
@@ -138,3 +139,4 @@ int main(){
 
     return 0; // Programa baigta sėkmingai
 }
+#endif // End of TESTING

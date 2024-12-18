@@ -21,4 +21,3 @@ add_executable(vertinimas
     zmogus.h
     zmogus.cpp
 )
-
