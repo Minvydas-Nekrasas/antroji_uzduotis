@@ -524,3 +524,17 @@ main.cpp faile iškviečiamas toString() metodas:
   ``` cpp
     cout << a.toString() << endl;
   ```
+#v2.0
+Aprašymas:
+- Cmake pritaikytas Catch2 testų frameworkui
+- Realizuoti unit testai
+- Sukurta .html Doxygen dokumentacija
+
+Sukūriami vertinimas.exe ir testavimas.exe failai:
+  ``` cpp
+    cmake "C:\Users\minvy\OneDrive\Desktop\antroji_uzduotis\CMakeLists.txt"
+  ```
+Sukūriamas TIK vertinimas.exe failas:
+  ``` cpp
+    cmake -DENABLE_TESTING=OFF "C:\Users\minvy\OneDrive\Desktop\antroji_uzduotis\CMakeLists.txt"
+  ```
