@@ -31,6 +31,7 @@ if(ENABLE_TESTING)
         studentas.h
         studentas.cpp
         tests.cpp
+        main.cpp
         duomenys.cpp
         duomenys.h
         rezultatas.cpp
